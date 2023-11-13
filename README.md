@@ -1,2 +1,1 @@
-# playgrounds fredric
 # playgrounds-fredric
