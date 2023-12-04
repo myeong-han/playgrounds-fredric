@@ -16,3 +16,5 @@ status: {}
 ---
 EOF
 done
+
+kubectl label ns api-gateway istio-injection=enabled

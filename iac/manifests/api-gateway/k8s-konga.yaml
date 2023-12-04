@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+  namespace: kong
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        app: konga
+        name: konga
+  template:
+    metadata:
+      labels:
+        name: konga
+        app: konga
+    spec:
+      containers:
+      - name: konga
+        image: pantsel/konga
+        ports:
+        - containerPort: 1337
+        env:
+          - name: NO_AUTH
+            value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: konga-svc
+  namespace: kong
+spec:
+  type: NodePort
+  ports:
+  - name: kong-proxy
+    port: 1337
+    targetPort: 1337
+    nodePort: 30330
+    protocol: TCP
+  selector:
+    app: konga
