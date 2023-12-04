@@ -121,3 +121,6 @@ alias kns="kubectl config set-context --current --namespace"
 source <(kubectl completion bash)
 source <(helm completion bash)
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:/home/mhkim/istio-1.20.0/bin"
+alias kns="sudo kubectl config set-context --current --namespace "
