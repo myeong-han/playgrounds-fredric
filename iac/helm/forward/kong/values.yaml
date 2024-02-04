@@ -296,7 +296,7 @@ proxy:
     servicePort: 80
     containerPort: 8000
     # Set a nodePort which is available if service type is NodePort
-    nodePort: 30080
+    nodePort: 31080
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters: []
 
@@ -308,7 +308,7 @@ proxy:
     # Set a target port for the TLS port in proxy service
     # overrideServiceTargetPort: 8000
     # Set a nodePort which is available if service type is NodePort
-    nodePort: 30443
+    nodePort: 31443
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters:
     - http2
@@ -445,10 +445,10 @@ plugins: {}
 # Be aware that the secret name will be used verbatim, and that certain types
 # of punctuation (e.g. `.`) can cause issues.
 # Example configuration
-# secretVolumes:
-# - kong-proxy-tls
+secretVolumes:
+- kong-proxy-tls
 # - kong-admin-tls
-secretVolumes: []
+# secretVolumes: []
 
 # Enable/disable migration jobs, and set annotations for them
 migrations:
@@ -460,7 +460,7 @@ migrations:
   # By default, these disable service mesh sidecar injection for Istio and Kuma,
   # as the sidecar containers do not terminate and prevent the jobs from completing
   annotations:
-    sidecar.istio.io/inject: false
+    sidecar.istio.io/inject: true
   # Additional annotations to apply to migration jobs
   # This is helpful in certain non-Helm installation situations such as GitOps
   # where additional control is required around this job creation.
@@ -1046,7 +1046,7 @@ enterprise:
 manager:
   # Enable creating a Kubernetes service for Kong Manager
   enabled: true
-  type: ClusterIP
+  type: NodePort
   loadBalancerClass:
   # To specify annotations or labels for the Manager service, add them to the respective
   # "annotations" or "labels" dictionaries below.
@@ -1060,17 +1060,17 @@ manager:
     servicePort: 8002
     containerPort: 8002
     # Set a nodePort which is available if service type is NodePort
-    # nodePort: 30081
+    nodePort: 31081
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters: []
 
   tls:
     # Enable HTTPS listen for Kong Manager
-    enabled: true
+    enabled: false
     servicePort: 8445
     containerPort: 8445
     # Set a nodePort which is available if service type is NodePort
-    # nodePort: 30444
+    odePort: 31444
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters:
     - http2
@@ -1078,15 +1078,15 @@ manager:
   ingress:
     # Enable/disable exposure using ingress.
     enabled: false
-    ingressClassName:
+    ingressClassName: kong
     # TLS secret name.
-    # tls: kong-manager.example.com-tls
+    tls: kong-proxy-tls
     # Ingress hostname
-    hostname:
+    hostname: ames1118.iptime.org
     # Map of ingress annotations.
     annotations: {}
     # Ingress path.
-    path: /
+    path: /kong/manager
     # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
     pathType: ImplementationSpecific
 

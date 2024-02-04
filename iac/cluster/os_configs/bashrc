@@ -117,10 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 alias k=kubectl
-alias kns="kubectl config set-context --current --namespace"
+alias kns="sudo kubectl config set-context --current --namespace "
 source <(kubectl completion bash)
 source <(helm completion bash)
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:/home/mhkim/istio-1.20.0/bin"
-alias kns="sudo kubectl config set-context --current --namespace "
+export iachome="$HOME/playgrounds-fredric/iac"
+export apphome="$HOME/playgrounds-fredric/app-modules"
