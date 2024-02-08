@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo chown mhkim:mhkim /etc/rancher/k3s/k3s.yaml
+
 # krew: plugin-manager 설치
 # Krew 설치
 (

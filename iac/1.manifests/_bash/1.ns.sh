@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/mhkim/playgrounds-fredric/iac/helm
+cd /home/mhkim/playgrounds-fredric/iac/2.helm
 export nss=$(ls -al | grep -Evw "README.md" | sed '1,3d' | awk '{print $9}' | sed -z 's/[\n\r]/ /g')
 
 for ns in $nss 
