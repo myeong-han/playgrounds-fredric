@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: mounted-pv1
 spec:
+  storageClassName: local-storage
   capacity:
     storage: 1700Gi
   volumeMode: Filesystem
