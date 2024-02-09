@@ -135,17 +135,17 @@ server:
       # -- (string) The port for rcon. If you change this, make sure to change the service.ports and server.ports accordingly.
       port: 25575
       # -- (string) If not provided, a random password will be generated and stored on the secret.
-      password: ""
+      password: "get!pals~18~"
     community:
       # -- (bool) Enables/disables the visibility of this server on Steam community servers list.
       enable: true
       # -- (string) If not provided, a random password will be generated and stored on the secret.
-      password: ""
+      password: "get!pals~18~"
       # -- (string) If not provided, a random server name will be generated with the "palworld_" prefix.
-    server_name: ""
+    server_name: "myeong-0001"
     # -- (string) The timezone used for time stamping backup server. Use the IANA TZ format with Area/Location
     # See the [list of TZ database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#Time_Zone_abbreviations)
-    timezone: "UTC"
+    timezone: "Asia/Seoul"
     # -- (string) You can manually specify the global IP address of the network on which the server running.
     # If not specified, it will be detected automatically. If it does not work well, try manual configuration.
     public_ip: ""
@@ -153,7 +153,7 @@ server:
     # If not specified, it will be detected automatically. If it does not work well, try manual configuration.
     public_port: ""
     # -- (string) Your server description to be shown in game
-    server_description: ""
+    server_description: "get out of here"
     # -- (string) Update/Install the server when the container starts.
     # THIS HAS TO BE ENABLED THE FIRST TIME YOU RUN THE CONTAINER
     update_on_boot: true
