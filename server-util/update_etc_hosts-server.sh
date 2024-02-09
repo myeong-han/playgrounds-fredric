@@ -20,8 +20,8 @@ fi
 
 #validation3
 if [ -z $hostnames ]; then
-        echo "##Report: $(pwd)/../_env/hosts.txt 파일을 찾을 수 없습니다. 실행위치 혹은 파일위치를 확인하세요."
-        exit 1
+	echo "##Report: $(pwd)/../_env/hosts.txt 파일을 찾을 수 없습니다. 실행위치 혹은 파일위치를 확인하세요."
+	exit 1
 fi
 
 target_ip=$(nslookup $target_domain | grep "Address:" | awk '{ print $2 }' | sed '1d' | head -n 1 | tr '\n' '\t')
@@ -36,7 +36,7 @@ fi
 for hostname in "${hostnames[@]}"; do
 	del_line=$( cat /etc/hosts | grep $hostname | head -n 1 )
 	echo "Delete Line: $del_line"
-	sed -i '' -e "/$del_line/d" "$hostfile"
+	sed -i "/$del_line/d" "$hostfile"
 #	cat /etc/hosts | grep -v ${hostname}
 done
 
