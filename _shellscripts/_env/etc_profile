@@ -25,3 +25,65 @@ if [ -d /etc/profile.d ]; then
   done
   unset i
 fi
+
+alias k=kubectl
+alias kns="sudo kubectl config set-context --current --namespace "
+source <(kubectl completion bash)
+source <(helm completion bash)
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$PATH:/home/mhkim/istio-1.20.0/bin"
+export iachome="$HOME/playgrounds-fredric/iac"
+export apphome="$HOME/playgrounds-fredric/app-modules"
+export k3shome="/etc/rancher/k3s"
+export k3ahome="/var/lib/rancher/k3s"
+_crictl() {
+    local cur opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts="attach
+create
+exec
+version
+images
+image
+img
+inspect
+inspecti
+imagefsinfo
+inspectp
+logs
+port-forward
+ps
+pull
+run
+runp
+rm
+rmi
+rmp
+pods
+start
+info
+stop
+stopp
+update
+config
+stats
+statsp
+completion
+checkpoint
+help
+h
+--config
+--debug
+--image-endpoint
+--runtime-endpoint
+--timeout
+--help
+--version"
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+
+complete -F _crictl crictl
+                                         

@@ -16,6 +16,6 @@ bash -c "cat << EOF > /etc/docker/daemon.json
 {
         \"insecure-registries\": [\"$1\"]
 }
-"
+EOF"
 systemctl restart docker
 docker info

@@ -19,7 +19,7 @@ openssl x509 -req -sha256 -days 3650 -in rootca.csr -signkey rootca.key -out roo
 
 #서버인증서
 openssl ecparam -out server.key -name prime256v1 -genkey
-openssl req -new -sha256 -key server.key -out server.csr -subj "/C=KR/L=Seoul/O=fredric/CN=*.fredric.playground.cld"
+openssl req -new -sha256 -key server.key -out server.csr -subj "/C=KR/L=Seoul/O=fredric/CN=*.fredric.playground.cld" -addext "subjectAltName = DNS:harbor.fredric.playground.cld,IP:192.168.0.4,IP:192.168.0.6"
 openssl x509 -req -sha256 -days 3650 -in server.csr -CA rootca.crt -CAkey rootca.key -CAcreateserial -out server.crt
 
 #서버인증서 정보 출력
