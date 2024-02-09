@@ -262,7 +262,7 @@ ingress:
     ##   secretName: core.harbor.domain-tls
     ##
     extraTls: 
-      - secretName: fredric.playground.cld-tls
+      - secretName: harbor.fredric.playground.cld-tls
         hosts:
           - harbor.fredric.playground.cld
     ## @param ingress.core.secrets Custom TLS certificates as secrets
