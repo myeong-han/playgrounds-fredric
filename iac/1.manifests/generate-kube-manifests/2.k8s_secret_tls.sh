@@ -2,6 +2,7 @@
 ssl_home=/etc/ssl/fredric
 nss=$(kubectl get ns --no-headers | awk '{print $1}' | grep -Ev 'kube-system|kube-public|kube-node-lease' | sed -z 's/[\n\r]/ /g')
 secret=fredric.playground.cld-tls
+days=365
 
 #validation
 if [ $USER != 'root' ]; then
@@ -18,7 +19,7 @@ openssl req -x509 \
   -newkey rsa:2048 \
   -keyout fredric.key \
   -out fredric.crt \
-  -days 365 \
+  -days $days \
   -nodes \
   -subj "/C=KO/L=Seoul/O=fredric/CN=*.fredric.playground.cld"
 
