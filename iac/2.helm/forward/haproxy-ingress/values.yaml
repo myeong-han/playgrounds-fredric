@@ -364,7 +364,7 @@ controller:
     securityContext: {}
 
   stats:
-    enabled: false
+    enabled: true
     port: 1936
     hostPort: ~
 
