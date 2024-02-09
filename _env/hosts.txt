@@ -1,0 +1,9 @@
+www.fredric.playground.cld
+harbor.fredric.playground.cld
+vault.fredric.playground.cld
+keycloak.fredric.playground.cld
+redis.fredric.playground.cld
+rabbitmq.fredric.playground.cld
+mariadb.fredric.playground.cld
+palworld.fredric.playground.cld
+minecraft.fredric.playground.cld
