@@ -35,8 +35,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH="$PATH:/home/mhkim/istio-1.20.0/bin"
 export iachome="$HOME/playgrounds-fredric/iac"
 export apphome="$HOME/playgrounds-fredric/app-modules"
-export k3shome="/etc/rancher/k3s"
-export k3ahome="/var/lib/rancher/k3s"
+export k3sconfig="/etc/rancher/k3s"
+export k3shome="/var/lib/rancher/k3s"
 _crictl() {
     local cur opts base
     COMPREPLY=()
