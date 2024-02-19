@@ -7,3 +7,5 @@ rabbitmq.fredric.playground.cld
 mariadb.fredric.playground.cld
 palworld.fredric.playground.cld
 minecraft.fredric.playground.cld
+prometheus.fredric.playground.cld
+grafana.fredric.playground.cld
