@@ -197,7 +197,7 @@ ingress:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: haproxy
+    ingressClassName: nginx
     ## @param ingress.core.pathType Ingress path type
     ##
     pathType: ImplementationSpecific
@@ -226,6 +226,8 @@ ingress:
       ingress.kubernetes.io/proxy-body-size: '0'
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
       nginx.ingress.kubernetes.io/proxy-body-size: '0'
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: ca-issuer
     ## @param ingress.core.tls Enable TLS configuration for the host defined at `ingress.core.hostname` parameter
     ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.core.hostname }}`
     ## You can:
@@ -261,10 +263,7 @@ ingress:
     ##     - core.harbor.domain
     ##   secretName: core.harbor.domain-tls
     ##
-    extraTls: 
-      - secretName: harbor.fredric.playground.cld-tls
-        hosts:
-          - harbor.fredric.playground.cld
+    extraTls: []
     ## @param ingress.core.secrets Custom TLS certificates as secrets
     ## NOTE: 'key' and 'certificate' are expected in PEM format
     ## NOTE: 'name' should line up with a 'secretName' set further up

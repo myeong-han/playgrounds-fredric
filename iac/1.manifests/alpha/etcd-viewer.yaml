@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: etcd-viewer
+  name: etcd-viewer
+  namespace: alpha
+spec:
+  containers:
+  - image: nikfoundas/etcd-viewer
+    name: etcd-viewer
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: etcd-viewer
+  name: etcd-viewer
+  namespace: alpha
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 31066
+  selector:
+    run: etcd-viewer
+  type: NodePort
+status:
+  loadBalancer: {}
