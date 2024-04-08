@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  csi-cluster-config-json: '[{"clusterID":"rook-ceph","monitors":["10.43.123.160:6789"],"namespace":""}]'
+  data: a=10.43.123.160:6789
+  mapping: '{"node":{"a":{"Name":"fredric","Hostname":"fredric","Address":"192.168.0.4"}}}'
+  maxMonId: "0"
+  outOfQuorum: ""
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-03-19T04:34:07Z"
+  deletionGracePeriodSeconds: 0
+  deletionTimestamp: "2024-03-19T04:38:54Z"
+  finalizers:
+  - ceph.rook.io/disaster-protection
+  name: rook-ceph-mon-endpoints
+  namespace: rook-ceph
+  ownerReferences:
+  - apiVersion: ceph.rook.io/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: CephCluster
+    name: rook-ceph
+    uid: 61123ea0-e560-4ea1-a9bf-c5bf664e514c
+  resourceVersion: "2100217"
+  uid: 4e4a5da1-10a6-4dc8-ba76-bb6585d22acb

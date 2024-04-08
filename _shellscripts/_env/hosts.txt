@@ -10,3 +10,4 @@ minecraft.fredric.playground.cld
 prometheus.fredric.playground.cld
 grafana.fredric.playground.cld
 linkerd.fredric.playground.cld
+ceph.fredric.playground.cld

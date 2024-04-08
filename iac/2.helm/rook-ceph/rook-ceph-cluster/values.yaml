@@ -124,7 +124,7 @@ cephClusterSpec:
   mon:
     # Set the number of mons to be started. Generally recommended to be 3.
     # For highest availability, an odd number of mons should be specified.
-    count: 3
+    count: 1
     # The mons should be on unique nodes. For production, at least 3 nodes are recommended for this reason.
     # Mons should only be allowed on the same node for test environments where data loss is acceptable.
     allowMultiplePerNode: false
@@ -133,7 +133,7 @@ cephClusterSpec:
     # When higher availability of the mgr is needed, increase the count to 2.
     # In that case, one mgr will be active and one in standby. When Ceph updates which
     # mgr is active, Rook will update the mgr services to match the active mgr.
-    count: 2
+    count: 1
     allowMultiplePerNode: false
     modules:
       # Several modules should not need to be included in this list. The "dashboard" and "monitoring" modules
@@ -145,9 +145,9 @@ cephClusterSpec:
   dashboard:
     enabled: true
     # serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)
-    # urlPrefix: /ceph-dashboard
+    urlPrefix: /ceph-dashboard
     # serve the dashboard at the given port.
-    # port: 8443
+    port: 8443
     # Serve the dashboard using SSL (if using ingress to expose the dashboard and `ssl: true` you need to set
     # the corresponding "backend protocol" annotation(s) for your ingress controller of choice)
     ssl: true
@@ -411,7 +411,22 @@ cephClusterSpec:
 ingress:
   # -- Enable an ingress for the ceph-dashboard
   dashboard:
-    {}
+    annotations:
+      cert-manager.io/cluster-issuer: ca-issuer
+      external-dns.alpha.kubernetes.io/hostname: ceph.fredric.playground.cld
+      nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+    host:
+      name: ceph.fredric.playground.cld
+      path: "/ceph-dashboard(/|$)(.*)"
+        #  path: /
+    tls:
+    - hosts:
+        - ceph.fredric.playground.cld
+      secretName: ceph.fredric.playground.cld-tls
+    ## Note: Only one of ingress class annotation or the `ingressClassName:` can be used at a time
+    ## to set the ingress class
+    ingressClassName: nginx
+
     # annotations:
     #   external-dns.alpha.kubernetes.io/hostname: dashboard.example.com
     #   nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
@@ -438,7 +453,7 @@ cephBlockPools:
     spec:
       failureDomain: host
       replicated:
-        size: 3
+        size: 1
       # Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false.
       # For reference: https://docs.ceph.com/docs/latest/mgr/prometheus/#rbd-io-statistics
       # enableRBDStats: true
@@ -501,11 +516,11 @@ cephFileSystems:
     spec:
       metadataPool:
         replicated:
-          size: 3
+          size: 1
       dataPools:
         - failureDomain: host
           replicated:
-            size: 3
+            size: 1
           # Optional and highly recommended, 'data0' by default, see https://github.com/rook/rook/blob/v1.13.7/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#pools
           name: data0
       metadataServer:
@@ -575,7 +590,7 @@ cephObjectStores:
       metadataPool:
         failureDomain: host
         replicated:
-          size: 3
+          size: 1
       dataPool:
         failureDomain: host
         erasureCoded:

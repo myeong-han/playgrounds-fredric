@@ -838,8 +838,7 @@ nginx:
   ## @param nginx.podAnnotations Annotations to add to the NGINX pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param nginx.podAffinityPreset NGINX Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1100,8 +1099,7 @@ portal:
   ## @param portal.podAnnotations Annotations to add to the Harbor Portal pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param portal.podAffinityPreset Harbor Portal Pod affinity preset. Ignored if `portal.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1432,8 +1430,7 @@ core:
   ## @param core.podAnnotations Annotations to add to the Harbor Core pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param core.podAffinityPreset Harbor Core Pod affinity preset. Ignored if `core.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1728,8 +1725,7 @@ jobservice:
   ## @param jobservice.podAnnotations Annotations to add to the Harbor Jobservice pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param jobservice.podAffinityPreset Harbor Jobservice Pod affinity preset. Ignored if `jobservice.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1917,8 +1913,7 @@ registry:
   ## @param registry.podAnnotations Annotations to add to the Harbor Registry pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param registry.podAffinityPreset Harbor Registry Pod affinity preset. Ignored if `registry.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2538,8 +2533,7 @@ trivy:
   ## @param trivy.podAnnotations Annotations to add to the Trivy pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param trivy.podAffinityPreset Trivy Pod affinity preset. Ignored if `trivy.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2806,8 +2800,7 @@ exporter:
   ## @param exporter.podAnnotations Annotations to add to the exporter pod
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations:
-    linkerd.io/inject: enabled
+  podAnnotations: {}
   ## @param exporter.podAffinityPreset Harbor Exporter Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
