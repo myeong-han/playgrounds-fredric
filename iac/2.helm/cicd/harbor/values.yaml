@@ -2894,7 +2894,7 @@ exporter:
 ## @param postgresql.primary.initdb.scripts [object] Initdb scripts to create Harbor databases
 ##
 postgresql:
-  enabled: true
+  enabled: false
   ## Override PostgreSQL default image as 14.x is not supported https://goharbor.io/docs/2.4.0/install-config/
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql
   ## @param postgresql.image.registry [default: REGISTRY_NAME] PostgreSQL image registry
@@ -2931,12 +2931,12 @@ postgresql:
 ## @param externalDatabase.coreDatabase External database name for core
 ##
 externalDatabase:
-  host: localhost
+  host: postgresql.datastore.svc
   port: 5432
-  user: bn_harbor
-  password: ""
+  user: harbor
+  password: harbor
   sslmode: disable
-  coreDatabase: ""
+  coreDatabase: harbor_core
 
 ## @section Redis&reg; parameters
 ##
@@ -2953,7 +2953,7 @@ externalDatabase:
 ## @param redis.sentinel.service.ports.sentinel Redis&reg; service port for Redis&reg; Sentinel
 ##
 redis:
-  enabled: true
+  enabled: false
   auth:
     enabled: false
     ## Redis&reg; password (both master and slave). Defaults to a random 10-character alphanumeric string if not set and auth.enabled is true.
@@ -2982,9 +2982,9 @@ redis:
 ## @param externalRedis.trivyAdapterDatabaseIndex Index for trivy adapter database
 ##
 externalRedis:
-  host: localhost
+  host: redis-master.datastore.svc
   port: 6379
-  password: ""
+  password: redis
   coreDatabaseIndex: '0'
   jobserviceDatabaseIndex: '1'
   registryDatabaseIndex: '2'
@@ -3004,7 +3004,7 @@ externalRedis:
 metrics:
   ## @param metrics.enabled Whether or not to enable metrics for different
   ##
-  enabled: false
+  enabled: true
   ## @param metrics.path Path where metrics are exposed
   ##
   path: /metrics
