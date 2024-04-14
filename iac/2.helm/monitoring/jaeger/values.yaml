@@ -1481,14 +1481,14 @@ externalDatabase:
   ## @param externalDatabase.dbUser.password Password for `dbUser.user`. Randomly generated if empty
   ##
   dbUser:
-    user: cassandra
-    password: cassandra
+    user: bn_jaeger
+    password: jaeger
   ## @param externalDatabase.existingSecret Name of existing secret containing the database secret
   ##
   existingSecret: auth-secrets
   ## @param externalDatabase.existingSecretPasswordKey Name of existing secret key containing the database password secret key
   ##
-  existingSecretPasswordKey: cassandra
+  existingSecretPasswordKey: cassandra_jaeger
   ## Cluster parameters
   ## @param externalDatabase.cluster.datacenter Name for cassandra's jaeger datacenter
   ##
@@ -1496,7 +1496,7 @@ externalDatabase:
     datacenter: "datacenter1"
   ## @param externalDatabase.keyspace Name for cassandra's jaeger keyspace
   ##
-  keyspace: "jaeger"
+  keyspace: "bitnami_jaeger"
 ## @section Cassandra storage sub-chart
 ##
 cassandra:
@@ -1517,7 +1517,7 @@ cassandra:
   ##
   dbUser:
     user: bn_jaeger
-    password: ""
+    password: jaeger
   ## Cassandra service port
   ## @param cassandra.service.ports.cql Cassandra cql port
   service:
