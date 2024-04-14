@@ -849,12 +849,12 @@ metrics:
     targetPort: 9402
     ## @param metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
     ## e.g:
     ## namespace: monitoring
     ##
-    namespace: ""
+    namespace: monitoring
     ## @param metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
     ##
     jobLabel: ""
