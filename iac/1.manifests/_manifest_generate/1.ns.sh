@@ -16,5 +16,3 @@ status: {}
 ---
 EOF
 done
-
-kubectl label ns forward istio-injection=enabled
