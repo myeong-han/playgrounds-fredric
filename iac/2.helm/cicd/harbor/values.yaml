@@ -838,7 +838,8 @@ nginx:
   ## @param nginx.podAnnotations Annotations to add to the NGINX pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param nginx.podAffinityPreset NGINX Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1099,7 +1100,8 @@ portal:
   ## @param portal.podAnnotations Annotations to add to the Harbor Portal pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param portal.podAffinityPreset Harbor Portal Pod affinity preset. Ignored if `portal.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1430,7 +1432,8 @@ core:
   ## @param core.podAnnotations Annotations to add to the Harbor Core pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param core.podAffinityPreset Harbor Core Pod affinity preset. Ignored if `core.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1725,7 +1728,8 @@ jobservice:
   ## @param jobservice.podAnnotations Annotations to add to the Harbor Jobservice pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param jobservice.podAffinityPreset Harbor Jobservice Pod affinity preset. Ignored if `jobservice.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -1913,7 +1917,8 @@ registry:
   ## @param registry.podAnnotations Annotations to add to the Harbor Registry pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param registry.podAffinityPreset Harbor Registry Pod affinity preset. Ignored if `registry.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2533,7 +2538,8 @@ trivy:
   ## @param trivy.podAnnotations Annotations to add to the Trivy pods (evaluated as a template)
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param trivy.podAffinityPreset Trivy Pod affinity preset. Ignored if `trivy.affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2800,7 +2806,8 @@ exporter:
   ## @param exporter.podAnnotations Annotations to add to the exporter pod
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
   ##
-  podAnnotations: {}
+  podAnnotations:
+    linkerd.io/inject: enabled
   ## @param exporter.podAffinityPreset Harbor Exporter Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
   ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   ##
@@ -2894,7 +2901,7 @@ exporter:
 ## @param postgresql.primary.initdb.scripts [object] Initdb scripts to create Harbor databases
 ##
 postgresql:
-  enabled: false
+  enabled: true
   ## Override PostgreSQL default image as 14.x is not supported https://goharbor.io/docs/2.4.0/install-config/
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql
   ## @param postgresql.image.registry [default: REGISTRY_NAME] PostgreSQL image registry
@@ -2931,12 +2938,12 @@ postgresql:
 ## @param externalDatabase.coreDatabase External database name for core
 ##
 externalDatabase:
-  host: postgresql.datastore.svc
+  host: localhost
   port: 5432
-  user: harbor
-  password: harbor
+  user: bn_harbor
+  password: ""
   sslmode: disable
-  coreDatabase: harbor_core
+  coreDatabase: ""
 
 ## @section Redis&reg; parameters
 ##
@@ -2953,7 +2960,7 @@ externalDatabase:
 ## @param redis.sentinel.service.ports.sentinel Redis&reg; service port for Redis&reg; Sentinel
 ##
 redis:
-  enabled: false
+  enabled: true
   auth:
     enabled: false
     ## Redis&reg; password (both master and slave). Defaults to a random 10-character alphanumeric string if not set and auth.enabled is true.
@@ -2982,9 +2989,9 @@ redis:
 ## @param externalRedis.trivyAdapterDatabaseIndex Index for trivy adapter database
 ##
 externalRedis:
-  host: redis-master.datastore.svc
+  host: localhost
   port: 6379
-  password: redis
+  password: ""
   coreDatabaseIndex: '0'
   jobserviceDatabaseIndex: '1'
   registryDatabaseIndex: '2'
@@ -3004,7 +3011,7 @@ externalRedis:
 metrics:
   ## @param metrics.enabled Whether or not to enable metrics for different
   ##
-  enabled: true
+  enabled: false
   ## @param metrics.path Path where metrics are exposed
   ##
   path: /metrics
@@ -3013,10 +3020,10 @@ metrics:
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled if `true`, creates a Prometheus Operator ServiceMonitor (requires `metrics.enabled` to be `true`)
     ##
-    enabled: true
+    enabled: false
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     ##
-    namespace: monitoring
+    namespace: ""
     ## @param metrics.serviceMonitor.interval Interval at which metrics should be scraped
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
     ##
