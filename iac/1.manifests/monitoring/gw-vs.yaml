@@ -1,0 +1,85 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: gw-monitoring
+  namespace: monitoring
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-fredric.playground.cld # This should match the Certificate secretName
+    hosts:
+    - "jaeger.fredric.playground.cld"
+    - "prometheus.fredric.playground.cld"
+    - "grafana.fredric.playground.cld"
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-jaeger
+  namespace: monitoring
+spec:
+  hosts:
+  - "jaeger.fredric.playground.cld"
+  gateways:
+  - gw-monitoring
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 16686
+        host: jaeger-query
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-prometheus
+  namespace: monitoring
+spec:
+  hosts:
+  - "prometheus.fredric.playground.cld"
+  gateways:
+  - gw-monitoring
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 9090
+        host: kube-prometheus-prometheus
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-grafana
+  namespace: monitoring
+spec:
+  hosts:
+  - "grafana.fredric.playground.cld"
+  gateways:
+  - gw-monitoring
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 3000
+        host: grafana

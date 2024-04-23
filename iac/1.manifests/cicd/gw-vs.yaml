@@ -1,0 +1,78 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: gw-cicd
+  namespace: cicd
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-fredric.playground.cld # This should match the Certificate secretName
+    hosts:
+    - "harbor.fredric.playground.cld"
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-harbor
+  namespace: cicd
+spec:
+  hosts:
+  - "harbor.fredric.playground.cld"
+  gateways:
+  - gw-cicd
+  http:
+  - match:
+    - uri:
+        prefix: /api/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core
+  - match:
+    - uri:
+        prefix: /service/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core
+  - match:
+    - uri:
+        prefix: /v2
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core
+  - match:
+    - uri:
+        prefix: /chartrepo/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core
+  - match:
+    - uri:
+        prefix: /c/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-portal
