@@ -38,7 +38,7 @@ spec:
     - destination:
         port:
           number: 80
-        host: harbor-core.cicd.svc
+        host: harbor-core.cicd.svc.cluster.local
   - match:
     - uri:
         prefix: /service/
@@ -46,7 +46,7 @@ spec:
     - destination:
         port:
           number: 80
-        host: harbor-core.cicd.svc
+        host: harbor-core.cicd.svc.cluster.local
   - match:
     - uri:
         prefix: /v2
@@ -54,7 +54,7 @@ spec:
     - destination:
         port:
           number: 80
-        host: harbor-core.cicd.svc
+        host: harbor-core.cicd.svc.cluster.local
   - match:
     - uri:
         prefix: /chartrepo/
@@ -62,7 +62,7 @@ spec:
     - destination:
         port:
           number: 80
-        host: harbor-core.cicd.svc
+        host: harbor-core.cicd.svc.cluster.local
   - match:
     - uri:
         prefix: /c/
@@ -70,12 +70,12 @@ spec:
     - destination:
         port:
           number: 80
-        host: harbor-core.cicd.svc
+        host: harbor-core.cicd.svc.cluster.local
   - route:
     - destination:
         port:
           number: 80
-        host: harbor-portal.cicd.svc
+        host: harbor-portal.cicd.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -96,7 +96,7 @@ spec:
     - destination:
         port:
           number: 16686
-        host: jaeger-query.monitoring.svc
+        host: jaeger-query.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -117,7 +117,7 @@ spec:
     - destination:
         port:
           number: 9090
-        host: kube-prometheus-prometheus.monitoring.svc
+        host: kube-prometheus-prometheus.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -138,7 +138,7 @@ spec:
     - destination:
         port:
           number: 3000
-        host: grafana.monitoring.svc
+        host: grafana.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -159,4 +159,4 @@ spec:
     - destination:
         port:
           number: 20001
-        host: kiali.istio-system.svc
+        host: kiali.istio-system.svc.cluster.local
