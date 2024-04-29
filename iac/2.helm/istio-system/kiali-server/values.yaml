@@ -23,7 +23,7 @@ additional_display_details:
   icon_annotation: kiali.io/api-type
   title: API Documentation
 
-istio_namespace: "" # default is where Kiali is installed
+istio_namespace: istio-system # default is where Kiali is installed
 
 auth:
   openid: {}
@@ -48,7 +48,10 @@ deployment:
     pod_anti: {}
   configmap_annotations: {}
   custom_secrets: []
-  host_aliases: []
+  host_aliases: 
+    - ip: "118.37.0.85"
+      hostnames:
+      - "jaeger.fredric.playground.cld"
   hpa:
     api_version: "autoscaling/v2"
     spec: {}
@@ -60,7 +63,7 @@ deployment:
   ingress:
     additional_labels: {}
     class_name: nginx
-    enabled: true
+    enabled: false
     override_yaml:
       metadata:
         annotations:
@@ -108,10 +111,29 @@ deployment:
   view_only_mode: false
 
 external_services:
+  prometheus:
+    url: http://prometheus.istio-system.svc:9090
+  grafana:
+    url: http://grafana.istio-system.svc:3000
+  tracing:
+    url: https://jaeger.fredric.playground.cld
   custom_dashboards:
     enabled: false
   istio:
-    root_namespace: ""
+    root_namespace: istio-system
+    component_status:
+      enabled: true
+      components:
+        - app_label: istiod
+          is_core: true
+        - app_label: gateway
+          is_core: true
+          is_proxy: true
+          namespace: istio-ingress
+        - app_label: gateway
+          is_core: true
+          is_proxy: true
+          namespace: istio-egress
 
 identity: {}
   #cert_file:
@@ -128,7 +150,7 @@ kiali_feature_flags:
     ignore: ["KIA1301"]
 
 login_token:
-  signing_key: ""
+  signing_key: "kiali_authsecret"
 
 server:
   port: 20001

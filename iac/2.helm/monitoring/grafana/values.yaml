@@ -663,7 +663,7 @@ service:
 ingress:
   ## @param ingress.enabled Set to true to enable ingress record generation
   ##
-  enabled: true
+  enabled: false
   ## DEPRECATED: Use ingress.annotations instead of ingress.certManager
   ## certManager: false
   ##
