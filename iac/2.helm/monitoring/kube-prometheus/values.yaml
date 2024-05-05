@@ -797,7 +797,7 @@ prometheus:
   ## let Prometheus know what its external URL is so that it can properly create links
   ## externalUrl: https://prometheus.example.com
   ##
-  externalUrl: ""
+  externalUrl: https://prometheus.fredric.playground.cld
   ## @param prometheus.resources CPU/Memory resource requests/limits for node
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
   ##
@@ -1038,7 +1038,6 @@ prometheus:
     ##   app: prometheus
     ##   k8s-app: prometheus
     ##
-    labels: {}
     annotations: {}
   ## @param prometheus.remoteRead The remote_read spec configuration for Prometheus
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#remotereadspec
@@ -1161,8 +1160,8 @@ prometheus:
   ## @param prometheus.additionalScrapeConfigs.internal.jobList A list of Prometheus scrape jobs
   ##
   additionalScrapeConfigs:
-    enabled: false
-    type: external
+    enabled: true
+    type: internal
     external:
       ## Name of the secret that Prometheus should use for the additional scrape configuration
       ##
@@ -1171,7 +1170,26 @@ prometheus:
       ##
       key: ""
     internal:
-      jobList: []
+      jobList: |
+        - job_name: 'istiod'
+          kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+              - istio-system
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+            action: keep
+            regex: istiod;http-monitoring
+        - job_name: 'envoy-stats'
+          metrics_path: /stats/prometheus
+          kubernetes_sd_configs:
+          - role: pod
+          relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_container_port_name]
+            action: keep
+            regex: '.*-envoy-prom'
+
   ## @param prometheus.additionalScrapeConfigsExternal.enabled Deprecated: Enable additional scrape configs that are managed externally to this chart
   ## @param prometheus.additionalScrapeConfigsExternal.name Deprecated: Name of the secret that Prometheus should use for the additional scrape configuration
   ## @param prometheus.additionalScrapeConfigsExternal.key Deprecated: Name of the key inside the secret to be used for the additional scrape configuration

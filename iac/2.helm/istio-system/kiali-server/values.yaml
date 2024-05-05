@@ -112,10 +112,18 @@ deployment:
 
 external_services:
   prometheus:
-    url: http://prometheus.istio-system.svc:9090
+    #url: http://prometheus.alpha.svc:9090
+    #url: http://prometheus.istio-system.svc:9090
+    url: http://kube-prometheus-prometheus.monitoring.svc:9090
   grafana:
     url: http://grafana.istio-system.svc:3000
   tracing:
+    enabled: true
+    auth:
+      insecure_skip_verify: true
+    provider: jaeger
+    in_cluster_url: http://jaeger-operator-jaeger-query.istio-system.svc:16685
+    use_grpc: true
     url: https://jaeger.fredric.playground.cld
   custom_dashboards:
     enabled: false

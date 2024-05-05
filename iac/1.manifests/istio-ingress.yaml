@@ -81,27 +81,6 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: vs-jaeger
-  namespace: istio-ingress
-spec:
-  hosts:
-  - "jaeger.fredric.playground.cld"
-  gateways:
-  - gw-tls-fredric
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        port:
-          number: 16686
-        host: jaeger-query.monitoring.svc.cluster.local
-
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
   name: vs-prometheus
   namespace: istio-ingress
 spec:
@@ -144,6 +123,27 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: vs-jaeger
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "jaeger.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 16686
+        host: jaeger-operator-jaeger-query.istio-system.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: vs-kiali
   namespace: istio-ingress
 spec:
@@ -160,3 +160,57 @@ spec:
         port:
           number: 20001
         host: kiali.istio-system.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-thanos
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "thanos.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9090
+        host: thanos-query-frontend.monitoring.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-thanos-grpc
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "thanos-grpc.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 10901
+        host: thanos-query-grpc.monitoring.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-thanos-query
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "thanos-query.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 9090
+        host: thanos-query.monitoring.svc.cluster.local

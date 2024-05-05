@@ -17,7 +17,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: "local-path"
 
 ## @section Common parameters
 
@@ -661,7 +661,7 @@ query:
   ingress:
     ## @param query.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param query.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos.local
@@ -672,7 +672,7 @@ query:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param query.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -763,7 +763,7 @@ query:
     grpc:
       ## @param query.ingress.grpc.enabled Enable ingress controller resource (GRPC)
       ##
-      enabled: false
+      enabled: true
       ## @param query.ingress.grpc.hostname Default host for the ingress resource (GRPC)
       ##
       hostname: thanos-grpc.local
@@ -774,7 +774,7 @@ query:
       ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
       ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
       ##
-      ingressClassName: ""
+      ingressClassName: nginx
       ## @param query.ingress.grpc.annotations Additional annotations for the Ingress resource (GRPC). To enable certificate autogeneration, place here your cert-manager annotations.
       ## For a full list of possible ingress annotations, please see
       ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -1217,7 +1217,7 @@ queryFrontend:
   ingress:
     ## @param queryFrontend.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param queryFrontend.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos.local
@@ -1229,7 +1229,7 @@ queryFrontend:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param queryFrontend.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -1313,7 +1313,7 @@ queryFrontend:
 bucketweb:
   ## @param bucketweb.enabled Enable/disable Thanos Bucket Web component
   ##
-  enabled: false
+  enabled: true
   ## @param bucketweb.logLevel Thanos Bucket Web log level
   ##
   logLevel: info
@@ -1648,7 +1648,7 @@ bucketweb:
   ingress:
     ## @param bucketweb.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param bucketweb.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos-bucketweb.local
@@ -1656,7 +1656,7 @@ bucketweb:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param bucketweb.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -1740,7 +1740,7 @@ bucketweb:
 compactor:
   ## @param compactor.enabled Enable/disable Thanos Compactor component
   ##
-  enabled: false
+  enabled: true
   ## @param compactor.logLevel Thanos Compactor log level
   ##
   logLevel: info
@@ -2081,7 +2081,7 @@ compactor:
   ingress:
     ## @param compactor.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param compactor.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos-compactor.local
@@ -2089,7 +2089,7 @@ compactor:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param compactor.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -2203,7 +2203,7 @@ compactor:
 storegateway:
   ## @param storegateway.enabled Enable/disable Thanos Store Gateway component
   ##
-  enabled: false
+  enabled: true
   ## @param storegateway.logLevel Thanos Store Gateway log level
   ##
   logLevel: info
@@ -2618,7 +2618,7 @@ storegateway:
   ingress:
     ## @param storegateway.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param storegateway.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos-storegateway.local
@@ -2626,7 +2626,7 @@ storegateway:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param storegateway.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -2717,7 +2717,7 @@ storegateway:
     grpc:
       ## @param storegateway.ingress.grpc.enabled Enable ingress controller resource (GRPC)
       ##
-      enabled: false
+      enabled: true
       ## @param storegateway.ingress.grpc.hostname Default host for the ingress resource (GRPC)
       ##
       hostname: thanos-grpc.local
@@ -2725,7 +2725,7 @@ storegateway:
       ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
       ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
       ##
-      ingressClassName: ""
+      ingressClassName: nginx
       ## @param storegateway.ingress.grpc.annotations Additional annotations for the Ingress resource (GRPC). To enable certificate autogeneration, place here your cert-manager annotations.
       ## For a full list of possible ingress annotations, please see
       ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -2846,7 +2846,7 @@ storegateway:
 ruler:
   ## @param ruler.enabled Enable/disable Thanos Ruler component
   ##
-  enabled: false
+  enabled: true
   ## @param ruler.logLevel Thanos Ruler log level
   ##
   logLevel: info
@@ -3266,7 +3266,7 @@ ruler:
   ingress:
     ## @param ruler.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param ruler.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos-ruler.local
@@ -3274,7 +3274,7 @@ ruler:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param ruler.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
@@ -3786,7 +3786,7 @@ receive:
   ingress:
     ## @param receive.ingress.enabled Set to true to enable ingress record generation
     ##
-    enabled: false
+    enabled: true
     ## @param receive.ingress.hostname When the ingress is enabled, a host pointing to this will be created
     ##
     hostname: thanos-receive.local
@@ -3794,7 +3794,7 @@ receive:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: ""
+    ingressClassName: nginx
     ## @param receive.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
