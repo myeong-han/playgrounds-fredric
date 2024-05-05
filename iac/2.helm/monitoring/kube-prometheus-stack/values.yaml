@@ -2929,7 +2929,7 @@ prometheus:
   # Thanos sidecar on prometheus nodes
   # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
   thanosService:
-    enabled: false
+    enabled: true
     annotations: {}
     labels: {}
 
@@ -2970,7 +2970,7 @@ prometheus:
   # ServiceMonitor to scrape Sidecar metrics
   # Needs thanosService to be enabled as well
   thanosServiceMonitor:
-    enabled: false
+    enabled: true
     interval: ""
 
     ## Additional labels
@@ -3170,7 +3170,7 @@ prometheus:
 
     ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
     ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-    # pathType: ImplementationSpecific
+    pathType: ImplementationSpecific
 
     ## TLS configuration for Thanos Ingress
     ## Secret must be manually created in the namespace
@@ -3475,7 +3475,7 @@ prometheus:
 
     ## External URL at which Prometheus will be reachable.
     ##
-    externalUrl: ""
+    externalUrl: https://prometheus.fredric.playground.cld
 
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -4217,7 +4217,7 @@ thanosRuler:
 
   ## Deploy thanosRuler
   ##
-  enabled: false
+  enabled: true
 
   ## Annotations for ThanosRuler
   ##

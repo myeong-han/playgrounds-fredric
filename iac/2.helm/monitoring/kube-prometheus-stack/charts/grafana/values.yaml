@@ -776,6 +776,12 @@ grafana.ini:
     url: https://grafana.net
   server:
     domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
+  database:
+    type: postgres
+    host: postgresql.datastore.svc:5432
+    name: grafana
+    user: grafana
+    password: grafana
 ## grafana Authentication can be enabled with the following values on grafana.ini
  # server:
       # The full public facing url you use in browser, used for redirects and emails
@@ -1318,4 +1324,4 @@ extraObjects: []
 #
 # Alternatively, if you wish to allow secret values to be exposed in the rendered grafana.ini configmap,
 # you can disable this check by setting assertNoLeakedSecrets to false.
-assertNoLeakedSecrets: true
+assertNoLeakedSecrets: false

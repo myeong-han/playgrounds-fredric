@@ -96,7 +96,7 @@ spec:
     - destination:
         port:
           number: 9090
-        host: kube-prometheus-prometheus.monitoring.svc.cluster.local
+        host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -116,8 +116,8 @@ spec:
     route:
     - destination:
         port:
-          number: 3000
-        host: grafana.monitoring.svc.cluster.local
+          number: 80
+        host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -176,41 +176,23 @@ spec:
   - route:
     - destination:
         port:
-          number: 9090
-        host: thanos-query-frontend.monitoring.svc.cluster.local
-
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: vs-thanos-grpc
-  namespace: istio-ingress
-spec:
-  hosts:
-  - "thanos-grpc.fredric.playground.cld"
-  gateways:
-  - gw-tls-fredric
-  http:
-  - route:
-    - destination:
-        port:
           number: 10901
-        host: thanos-query-grpc.monitoring.svc.cluster.local
+        host: kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: vs-thanos-query
+  name: vs-thanos-ruler
   namespace: istio-ingress
 spec:
   hosts:
-  - "thanos-query.fredric.playground.cld"
+  - "thanos-ruler.fredric.playground.cld"
   gateways:
   - gw-tls-fredric
   http:
   - route:
     - destination:
         port:
-          number: 9090
-        host: thanos-query.monitoring.svc.cluster.local
+          number: 10902
+        host: kube-prometheus-stack-thanos-ruler.monitoring.svc.cluster.local
