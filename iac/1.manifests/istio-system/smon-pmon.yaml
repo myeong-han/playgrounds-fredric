@@ -4,7 +4,6 @@ metadata:
   name: envoy-stats-monitor
   namespace: istio-system
   labels:
-    monitoring: istio-proxies
     release: kube-prometheus-stack
 spec:
   selector:
@@ -51,7 +50,6 @@ metadata:
   name: istio-component-monitor
   namespace: istio-system
   labels:
-    monitoring: istio-components
     release: kube-prometheus-stack
 spec:
   jobLabel: istio
