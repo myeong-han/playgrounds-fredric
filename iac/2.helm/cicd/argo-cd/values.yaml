@@ -17,7 +17,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: local-path
   ## Compatibility adaptations for Kubernetes platforms
   ##
   compatibility:
@@ -352,7 +352,7 @@ controller:
   metrics:
     ## @param controller.metrics.enabled Enable Argo CD application controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param controller.metrics.service.type Argo CD application controller service type
       ##
@@ -405,7 +405,7 @@ controller:
     serviceMonitor:
       ## @param controller.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param controller.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -436,7 +436,8 @@ controller:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param controller.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -684,7 +685,7 @@ applicationSet:
   metrics:
     ## @param applicationSet.metrics.enabled Enable Argo CD applicationSet controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param applicationSet.metrics.service.type Argo CD applicationSet controller service type
       ##
@@ -738,7 +739,7 @@ applicationSet:
     serviceMonitor:
       ## @param applicationSet.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param applicationSet.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -769,7 +770,8 @@ applicationSet:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param applicationSet.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -1159,7 +1161,7 @@ notifications:
   metrics:
     ## @param notifications.metrics.enabled Enable Argo CD notifications controller metrics
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param notifications.metrics.service.type Argo CD notifications controller service type
       ##
@@ -1213,7 +1215,7 @@ notifications:
     serviceMonitor:
       ## @param notifications.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param notifications.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -1244,7 +1246,8 @@ notifications:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param notifications.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -2204,7 +2207,7 @@ server:
     ## Enable metrics for Argo CD server
     ## @param server.metrics.enabled Enable metrics for the Argo CD server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param server.metrics.service.type Argo CD server service type
       ##
@@ -2257,7 +2260,7 @@ server:
     serviceMonitor:
       ## @param server.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param server.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -2288,7 +2291,8 @@ server:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param server.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -2930,7 +2934,7 @@ repoServer:
     ## Enable metrics for Argo CD repo server
     ## @param repoServer.metrics.enabled Enable metrics for the Argo CD repo server
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param repoServer.metrics.service.type Argo CD repo server service type
       ##
@@ -2983,7 +2987,7 @@ repoServer:
     serviceMonitor:
       ## @param repoServer.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param repoServer.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -3014,7 +3018,8 @@ repoServer:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param repoServer.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -3466,7 +3471,7 @@ dex:
     ## Enable metrics for Argo Dex
     ## @param dex.metrics.enabled Enable metrics service for Dex
     ##
-    enabled: false
+    enabled: true
     service:
       ## @param dex.metrics.service.type Dex service type
       ##
@@ -3519,7 +3524,7 @@ dex:
     serviceMonitor:
       ## @param dex.metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
       ##
-      enabled: false
+      enabled: true
       ## @param dex.metrics.serviceMonitor.namespace Namespace which Prometheus is running in
       ## e.g:
       ## namespace: monitoring
@@ -3550,7 +3555,8 @@ dex:
       ## selector:
       ##   prometheus: my-prometheus
       ##
-      selector: {}
+      selector: 
+        release: kube-prometheus-stack
       ## @param dex.metrics.serviceMonitor.honorLabels honorLabels chooses the metric's labels on collisions with target labels
       ##
       honorLabels: false
@@ -3969,7 +3975,7 @@ redis:
     pullSecrets: []
   ## @param redis.enabled Enable Redis dependency
   ##
-  enabled: true
+  enabled: false
   ## @param redis.nameOverride Name override for the Redis dependency
   ##
   nameOverride: ""
@@ -4004,7 +4010,7 @@ externalRedis:
   ## Redis&reg; host
   ## @param externalRedis.host External Redis host
   ##
-  host: ""
+  host: redis-master.datastore.svc
   ## Redis&reg; port
   ## @param externalRedis.port External Redis port
   ##
@@ -4013,21 +4019,28 @@ externalRedis:
   ## Ignored if existingSecret is set
   ## @param externalRedis.password External Redis password
   ##
-  password: ""
+  password: redis
   ## Name of existing secret object containing the password
   ## @param externalRedis.existingSecret Existing secret for the external redis
   ##
-  existingSecret: ""
+  existingSecret: auth-secrets
   ## Password key to be retrieved from Redis&reg; secret
   ## @param externalRedis.existingSecretPasswordKey Password key for the existing secret containing the external redis password
   ##
-  existingSecretPasswordKey: 'redis-password'
+  existingSecretPasswordKey: redis
+  ## Specify a label to use with the label selector
+  ## @param externalRedis.selector External Redis lables
+  ##
+  selector:
+    app.kubernetes.io/component: master
+    app.kubernetes.io/instance: redis
+    app.kubernetes.io/name: redis
 ## Wait-for-redis init container configuration
 ##
 redisWait:
   ## @param redisWait.enabled Enables waiting for redis
   ##
-  enabled: true
+  enabled: false
   ## @param redisWait.extraArgs Additional arguments for the redis-cli call, such as TLS
   ##
   extraArgs: ''
