@@ -81,6 +81,23 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: vs-argocd-server
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "argocd.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 443
+        host: argo-cd-server.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: vs-prometheus
   namespace: istio-ingress
 spec:
