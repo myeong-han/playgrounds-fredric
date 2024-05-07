@@ -4014,6 +4014,10 @@ redis:
 ## External Redis&reg;
 ##
 externalRedis:
+  ## Can be enabled after redisWait.enabled and redis.enabled are set to false
+  ## @param externalRedis.enabled Enables External Redis
+  ##
+  enabled: true
   ## Redis&reg; host
   ## @param externalRedis.host External Redis host
   ##
