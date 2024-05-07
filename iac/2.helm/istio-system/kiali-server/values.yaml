@@ -122,13 +122,13 @@ external_services:
       insecure_skip_verify: true
     in_cluster_url: http://kube-prometheus-stack-grafana.monitoring.svc:80
     url: https://grafana.fredric.playground.cld
-    dashboards:
-      - name: "Istio Service Dashboard"
-      - name: "Istio Workload Dashboard"
-      - name: "Istio Mesh Dashboard"
-      - name: "Istio Control Plane Dashboard"
-      - name: "Istio Performance Dashboard"
-      - name: "Istio Wasm Extension Dashboard"
+    dashboards: []
+      #      - name: "Istio Service Dashboard"
+      #      - name: "Istio Workload Dashboard"
+      #      - name: "Istio Mesh Dashboard"
+      #      - name: "Istio Control Plane Dashboard"
+      #      - name: "Istio Performance Dashboard"
+      #      - name: "Istio Wasm Extension Dashboard"
   tracing:
     enabled: true
     auth:

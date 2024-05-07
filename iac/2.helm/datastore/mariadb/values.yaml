@@ -1256,7 +1256,7 @@ metrics:
     enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
     ##
-    namespace: monitoring
+    namespace: ""
     ## @param metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in prometheus.
     ##
     jobLabel: ""
@@ -1288,7 +1288,8 @@ metrics:
     selector: {}
     ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
     ##
-    labels: {}
+    labels:
+      release: kube-prometheus-stack
   ## Prometheus Operator PrometheusRule configuration
   ##
   prometheusRule:

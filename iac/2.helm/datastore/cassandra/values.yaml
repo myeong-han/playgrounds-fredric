@@ -808,7 +808,7 @@ metrics:
     enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     ##
-    namespace: monitoring
+    namespace: ""
     ## @param metrics.serviceMonitor.interval Interval at which metrics should be scraped.
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
     ## e.g:
@@ -846,7 +846,8 @@ metrics:
     ## @param metrics.serviceMonitor.labels Used to pass Labels that are required by the installed Prometheus Operator
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
     ##
-    labels: {}
+    labels:
+      release: kube-prometheus-stack
   ## Metrics container ports to open
   ## If hostNetwork true: the hostPort is set identical to the containerPort
   ## @param metrics.containerPorts.http HTTP Port on the Host and Container
