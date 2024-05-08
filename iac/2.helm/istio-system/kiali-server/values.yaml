@@ -119,6 +119,7 @@ external_services:
   grafana:
     enabled: true
     auth:
+      password: secret:auth-secrets:global
       insecure_skip_verify: true
     in_cluster_url: http://kube-prometheus-stack-grafana.monitoring.svc:80
     url: https://grafana.fredric.playground.cld
