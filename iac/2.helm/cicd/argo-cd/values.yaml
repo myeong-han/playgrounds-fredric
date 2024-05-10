@@ -4021,7 +4021,7 @@ externalRedis:
   ## Redis&reg; host
   ## @param externalRedis.host External Redis host
   ##
-  host: redis-master.datastore.svc
+  host: redis-argocd-master.datastore.svc
   ## Redis&reg; port
   ## @param externalRedis.port External Redis port
   ##

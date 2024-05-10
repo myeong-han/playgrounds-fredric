@@ -2982,7 +2982,7 @@ redis:
 ## @param externalRedis.trivyAdapterDatabaseIndex Index for trivy adapter database
 ##
 externalRedis:
-  host: redis-master.datastore.svc
+  host: redis-harbor-master.datastore.svc
   port: 6379
   password: redis
   coreDatabaseIndex: '0'
