@@ -82,7 +82,7 @@ deployment:
     ENABLE_UPDATE_CHECK: 1
     UPDATE_CHECK_INTERVAL: 1d
     PERMIT_DOCKER: none
-    TZ: 
+    TZ: Asia/Seoul
     NETWORK_INTERFACE: 
     TLS_LEVEL: 
     SPOOF_PROTECTION:
@@ -202,7 +202,7 @@ deployment:
     SASLAUTHD_LDAP_TLS_CACERT_FILE: 
     SASLAUTHD_LDAP_TLS_CACERT_DIR: 
     SASLAUTHD_LDAP_PASSWORD_ATTR: 
-    SASLAUTHD_LDAP_AUTH_METHOD: 
+    SASLAUTHD_LDAP_AUTH_METHOD:
     SASLAUTHD_LDAP_MECH: 
 
     # -----------------------------------------------
@@ -419,7 +419,7 @@ metrics:
     #  cpu: "500M"
 
   serviceMonitor:
-    enabled: true
+    enabled: false
     scrapeInterval: 15s
     ## Optionally add additional labels to the deployment
     labels: 
