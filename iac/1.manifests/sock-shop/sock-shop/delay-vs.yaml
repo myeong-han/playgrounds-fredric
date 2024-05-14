@@ -8,6 +8,7 @@ spec:
   http:
   - fault:
       delay:
+        fixedDelay: 10s
         percentage:
           value: 50
     route:

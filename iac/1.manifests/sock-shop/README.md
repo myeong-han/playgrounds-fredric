@@ -2,6 +2,11 @@
 ### 사전 설정
 1. istio-ingress svc의 Cluster-IP를 구한다 ex)`k get svc -n istio-system`
 2. `vi util_fortio.yaml` 내에서 `.spec.template.spec.hostAliases[0].ip`의 값을 위의 값으로 수정한다.
+#### 사용할 Domain HostName
+```
+sock.shop.default
+sock.shop.canary
+```
 
 ### configuering
 ```bash                                                                                                                        
