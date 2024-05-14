@@ -1,10 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  name: front-end-v2
-  namespace: sock-shop
+  name: fortio-deploy
 spec:
+  selector:
+    matchLabels:
+      app: fortio
   replicas: 1
   strategy: {}
   template:
@@ -13,25 +15,23 @@ spec:
         sidecar.istio.io/status: '{"version":"ee8ec9a1009cf4edd61fecccfc2413a311e9b8e10470afdc8a053567f0075a9a","initContainers":["istio-init"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"],"imagePullSecrets":null}'
       creationTimestamp: null
       labels:
-        name: front-end
-        version: v2
+        app: fortio
     spec:
+      hostAliases:
+      - ip: 10.43.59.19
+        hostnames:
+        - sock.shop
+        - sock.shop.canary
       containers:
-      - image: vinayakinfrac/front-end:0.3.13
-        name: front-end
+      - image: istio/fortio:latest_release
+        imagePullPolicy: Always
+        name: fortio
         ports:
+        - containerPort: 8080
+          name: http-fortio
         - containerPort: 8079
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        securityContext:
-          capabilities:
-            drop:
-            - all
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          runAsUser: 10001
+          name: grpc-ping
+        resources: {}
       - args:
         - proxy
         - sidecar
@@ -40,7 +40,7 @@ spec:
         - --binaryPath
         - /usr/local/bin/envoy
         - --serviceCluster
-        - istio-proxy
+        - fortio
         - --drainDuration
         - 45s
         - --parentShutdownDuration
@@ -78,7 +78,7 @@ spec:
           value: REDIRECT
         - name: ISTIO_METAJSON_LABELS
           value: |
-            {"name":"front-end","version":"v2"}
+            {"app":"fortio"}
         image: gcr.io/istio-release/proxyv2:release-1.0-latest-daily
         imagePullPolicy: IfNotPresent
         name: istio-proxy
@@ -111,7 +111,7 @@ spec:
         - -x
         - ""
         - -b
-        - "8079"
+        - 8080,8079
         - -d
         - ""
         image: gcr.io/istio-release/proxy_init:release-1.0-latest-daily
@@ -123,8 +123,6 @@ spec:
             add:
             - NET_ADMIN
           privileged: true
-      nodeSelector:
-        beta.kubernetes.io/os: linux
       volumes:
       - emptyDir:
           medium: Memory

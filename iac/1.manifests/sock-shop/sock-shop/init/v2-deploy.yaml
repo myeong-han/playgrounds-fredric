@@ -1,12 +1,16 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  name: front-end-v1
+  name: front-end-v2
   namespace: sock-shop
 spec:
   replicas: 1
   strategy: {}
+  selector:
+    matchLabels:
+      name: front-end
+      version: v2
   template:
     metadata:
       annotations:
@@ -14,10 +18,10 @@ spec:
       creationTimestamp: null
       labels:
         name: front-end
-        version: v1
+        version: v2
     spec:
       containers:
-      - image: weaveworksdemos/front-end:0.3.12
+      - image: vinayakinfrac/front-end:0.3.13
         name: front-end
         ports:
         - containerPort: 8079
@@ -78,7 +82,7 @@ spec:
           value: REDIRECT
         - name: ISTIO_METAJSON_LABELS
           value: |
-            {"name":"front-end","version":"v1"}
+            {"name":"front-end","version":"v2"}
         image: gcr.io/istio-release/proxyv2:release-1.0-latest-daily
         imagePullPolicy: IfNotPresent
         name: istio-proxy

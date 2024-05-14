@@ -2,25 +2,13 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: front-end
-  namespace: sock-shop
 spec:
   hosts:
-  - "*"
+  - test.bluegreen
   gateways:
   - sockshop-gateway
   http:
   - route:
     - destination:
-        host: front-end
+        host: front-end.sock-shop.svc.cluster.local
         subset: v1
----
-kind: DestinationRule
-metadata:
-  name: front-end
-spec:
-  host: front-end
-  subsets:
-  - name: v1
-    labels:
-      version: v1
-

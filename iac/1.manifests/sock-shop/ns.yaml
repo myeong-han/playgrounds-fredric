@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: enabled
+    kubernetes.io/metadata.name: sock-shop
+  name: sock-shop
+spec:
+  finalizers:
+  - kubernetes
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: enabled
+    kubernetes.io/metadata.name: sock-shop
+  name: sock-shop-canary
+spec:
+  finalizers:
+  - kubernetes
