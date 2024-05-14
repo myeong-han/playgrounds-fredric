@@ -22,24 +22,24 @@ abort.yaml  circuit-dr.yaml  delay.yaml  init  mtls-dr.yaml  v1-route.yaml  v2-r
 ### TEST
 ```bash
 #test-abort ns gw & vs
-k apply -n sock-shop -f sock-shop/abort.yaml
-k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop/catalogue
+k apply -n sock-shop -f sock-shop/abort-vs.yaml
+k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/catalogue
 
 #test-delay ns gw & vs
-k apply -n sock-shop -f sock-shop/delay.yaml
-k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop/catalogue
+k apply -n sock-shop -f sock-shop/delay-vs.yaml
+k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/catalogue
 
 #test-canary ns gw & vs
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.canary/index.html
 
 #test-bluegreen ns gw & vs
 ## switch v2
-k apply -n sock-shop -f sock-shop/v2-route.yaml
-k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop/index.html
+k apply -n sock-shop -f sock-shop/v2-route-vs.yaml
+k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/index.html
 
 ## switch v1
-k apply -n sock-shop -f sock-shop/v1-route.yaml
-k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop/index.html
+k apply -n sock-shop -f sock-shop/v1-route-vs.yaml
+k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/index.html
 
 ## CLEAN
 k apply -n sock-shop -f sock-shop/init/ingress-gateway.yaml -f sock-shop/init/vs.yaml

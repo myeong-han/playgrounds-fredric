@@ -20,7 +20,7 @@ spec:
       hostAliases:
       - ip: 10.43.59.19
         hostnames:
-        - sock.shop
+        - sock.shop.default
         - sock.shop.canary
       containers:
       - image: istio/fortio:latest_release
