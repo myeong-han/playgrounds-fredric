@@ -26,18 +26,18 @@ abort.yaml  circuit-dr.yaml  delay.yaml  init  mtls-dr.yaml  v1-route.yaml  v2-r
 
 ### TEST
 ```bash
-#test-abort ns gw & vs
+#test abort fault injection
 k apply -n sock-shop -f sock-shop/abort-vs.yaml
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/catalogue
 
-#test-delay ns gw & vs
+#test delay fault injection
 k apply -n sock-shop -f sock-shop/delay-vs.yaml
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/catalogue
 
-#test-canary ns gw & vs
+#test canary deploy
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.canary/index.html
 
-#test-bluegreen ns gw & vs
+#test bluegreen deploy
 ## switch v2
 k apply -n sock-shop -f sock-shop/v2-route-vs.yaml
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/index.html
@@ -46,6 +46,11 @@ k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -log
 k apply -n sock-shop -f sock-shop/v1-route-vs.yaml
 k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 3 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/index.html
 
+#test http1MaxPendingRequests 제한하기: 2 connection
+k apply -n sock-shop -f sock-shop/circuit-dr.yaml
+k exec -it deploy/fortio-deploy -c fortio -- fortio load -c 10 -qps 0 -n 500 -loglevel Warning http://sock.shop.default/index.html
+# 대략적으로 10connection중 8개가 pending불가이므로 20%성공
+
 ## CLEAN
-k apply -n sock-shop -f sock-shop/init/ingress-gateway.yaml -f sock-shop/init/vs.yaml
+k apply -n sock-shop -f sock-shop/init/dr.yaml -f sock-shop/init/ingress-gateway.yaml -f sock-shop/init/vs.yaml
 ```

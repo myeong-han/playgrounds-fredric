@@ -11,7 +11,7 @@ spec:
         maxConnections: 1
       http:
         http1MaxPendingRequests: 2
-        maxRequestsPerConnection: 2  # KeepAlive is disabled
+        maxRequestsPerConnection: 1  # KeepAlive is disabled
   subsets:
   - name: v1
     labels:
