@@ -1,1 +1,5 @@
+# Security measures
 _shellscripts/_env/_secret
+
+# Copyright protection measures
+iac/1.manifests/istio-tutorial
