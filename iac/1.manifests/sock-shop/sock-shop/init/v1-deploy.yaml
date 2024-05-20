@@ -23,7 +23,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: mongo
+      - image: mongo:4.2
         name: carts-db
         ports:
         - containerPort: 27017
@@ -830,7 +830,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: mongo
+      - image: mongo:4.2
         name: orders-db
         ports:
         - containerPort: 27017

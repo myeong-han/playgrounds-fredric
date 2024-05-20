@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - sock.shop.default
+    - gateway.istio-ingress.svc
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,7 +21,7 @@ metadata:
   namespace: sock-shop
 spec:
   hosts:
-  - sock.shop.default
+  - '*'
   gateways:
   - sockshop-gateway
   http:
