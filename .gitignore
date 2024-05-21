@@ -3,6 +3,7 @@
 *.tar
 
 # Security measures
+*.sec
 _shellscripts/_env/_secret
 
 # Copyright protection measures
