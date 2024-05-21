@@ -1,3 +1,7 @@
+# Ignore Types
+*.tgz
+*.tar
+
 # Security measures
 _shellscripts/_env/_secret
 
