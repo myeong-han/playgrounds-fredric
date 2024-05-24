@@ -66,11 +66,20 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{- define "infisical.postgresDBConnectionString" -}}
+{{- if .Values.externalPostgresql.enabled -}}
+{{- $dbUsername := .Values.externalPostgresql.auth.username -}}
+{{- $dbPassword := .Values.externalPostgresql.auth.password -}}
+{{- $dbName := .Values.externalPostgresql.auth.database -}}
+{{- $serviceFqdn := .Values.externalPostgresql.fqdn -}}
+{{- $servicePort := .Values.externalPostgresql.port | printf "%.0f" -}}
+{{- printf "postgresql://%s:%s@%s:%s/%s" $dbUsername $dbPassword $serviceFqdn $servicePort $dbName -}}
+{{- else -}}
 {{- $dbUsername := .Values.postgresql.auth.username -}}
 {{- $dbPassword := .Values.postgresql.auth.password -}}
 {{- $dbName := .Values.postgresql.auth.database -}}
 {{- $serviceName := include "infisical.postgresService" . -}}
 {{- printf "postgresql://%s:%s@%s:5432/%s" $dbUsername $dbPassword $serviceName $dbName -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
@@ -101,7 +110,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 
 {{- define "infisical.redisConnectionString" -}}
+{{- if .Values.externalRedis.enabled -}}
+{{- $password := .Values.externalRedis.auth.password -}}
+{{- $serviceFqdn := .Values.externalRedis.fqdn -}}
+{{- $servicePort := .Values.externalRedis.port | printf "%.0f" -}}
+{{- printf "redis://default:%s@%s:%s" $password $serviceFqdn $servicePort -}}
+{{- else -}}
 {{- $password := .Values.redis.auth.password -}}
 {{- $serviceName := include "infisical.redisServiceName" . -}}
 {{- printf "redis://default:%s@%s:6379" $password "redis-master" -}}
+{{- end -}}
 {{- end -}}

@@ -26,7 +26,7 @@ spec:
           image: "{{ $infisicalValues.image.repository }}:{{ $infisicalValues.image.tag }}"
           command: ["npm", "run", "migration:latest"]
           env:
-          {{- if .Values.postgresql.enabled }}
+          {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
           - name: DB_CONNECTION_URI
             value: {{ include "infisical.postgresDBConnectionString" . }}
           {{- end }}

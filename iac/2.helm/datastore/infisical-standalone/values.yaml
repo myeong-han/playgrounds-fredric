@@ -4,11 +4,11 @@ fullnameOverride: ""
 infisical:
   enabled: true
   name: infisical
-  autoDatabaseSchemaMigration: true
+  autoDatabaseSchemaMigration: false
   fullnameOverride: ""
   podAnnotations: {}
   deploymentAnnotations: {}
-  replicaCount: 2
+  replicaCount: 1
 
   image:
     repository: infisical/infisical
@@ -18,6 +18,14 @@ infisical:
 
   affinity: {}
   kubeSecretRef: "infisical-secrets"
+  kubeSecretGenerate:
+    enabled: true
+    env:
+      AUTH_SECRET: "Requred" #openssl rand -base64 32
+      ENCRYPTION_KEY: "Requerd" #openssl rand -hex 16
+      REDIS_URL: "Requerd" #redis://$user:$password@$service_domain:$service_port
+      DB_CONNECTION_URI: "Requerd" #postgresql://$user:$password@$service_domain:$service_port/$database
+
   service:
     annotations: {}
     type: ClusterIP
@@ -51,6 +59,15 @@ postgresql:
     password: root
     database: infisicalDB
 
+externalPostgresql:
+  enabled: false
+  fqdn: postgresql.datastore.svc
+  port: 5432
+  auth:
+    username: infisical
+    password: infisical
+    database: infisical
+
 redis:
   enabled: false
   name: "redis"
@@ -61,3 +78,10 @@ redis:
   auth:
     password: "redis"
   architecture: standalone
+
+externalRedis:
+  enabled: false
+  fqdn: redis-infisical-master.datastore.svc
+  port: 6379
+  auth:
+    password: "redis"

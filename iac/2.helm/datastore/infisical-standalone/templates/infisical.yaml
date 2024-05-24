@@ -55,11 +55,11 @@ spec:
         ports: 
         - containerPort: 8080
         env:
-        {{- if .Values.postgresql.enabled }}
+        {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
         - name: DB_CONNECTION_URI
           value: {{ include "infisical.postgresDBConnectionString" . }}
         {{- end }}
-        {{- if .Values.redis.enabled }}
+        {{- if or .Values.redis.enabled .Values.externalRedis.enabled }}
         - name: REDIS_URL
           value: {{ include "infisical.redisConnectionString" . }}
         {{- end }}
