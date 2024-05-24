@@ -29,10 +29,14 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+    {{- if $infisicalValues.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml $infisicalValues.image.imagePullSecrets | nindent 6 }}
+    {{- end }}
     {{- if $infisicalValues.autoDatabaseSchemaMigration }}
       initContainers:
       - name: "migration-init"
-        image: "groundnuty/k8s-wait-for:1.3"
+        image: "ghcr.io/groundnuty/k8s-wait-for:no-root-v2.0"
         imagePullPolicy: {{ $infisicalValues.image.pullPolicy }}
         args: 
         - "job"

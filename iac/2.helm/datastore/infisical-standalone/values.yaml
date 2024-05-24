@@ -14,6 +14,7 @@ infisical:
     repository: infisical/infisical
     tag: "v0.46.3-postgres"
     pullPolicy: IfNotPresent
+    imagePullSecrets: []
 
   affinity: {}
   kubeSecretRef: "infisical-secrets"
@@ -24,16 +25,16 @@ infisical:
 
   resources:
     limits:
-      memory: 350Mi
+      memory: 600Mi
     requests:
       cpu: 350m
 
 ingress:
-  enabled: true
+  enabled: false
   hostName: ""
   ingressClassName: nginx
   nginx:
-    enabled: true
+    enabled: false
   annotations: {}
   tls:
     []
@@ -42,7 +43,7 @@ ingress:
     #     - some.domain.com
 
 postgresql:
-  enabled: true
+  enabled: false
   name: "postgresql"
   fullnameOverride: "postgresql"
   auth:
@@ -51,12 +52,12 @@ postgresql:
     database: infisicalDB
 
 redis:
-  enabled: true
+  enabled: false
   name: "redis"
   fullnameOverride: "redis"
   cluster:
     enabled: false
   usePassword: true
   auth:
-    password: "mysecretpassword"
+    password: "redis"
   architecture: standalone
