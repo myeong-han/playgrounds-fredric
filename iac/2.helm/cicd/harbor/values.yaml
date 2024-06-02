@@ -197,7 +197,7 @@ ingress:
     ## This is supported in Kubernetes 1.18+ and required if you have more than one IngressClass marked as the default for your cluster .
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
-    ingressClassName: haproxy
+    ingressClassName: nginx
     ## @param ingress.core.pathType Ingress path type
     ##
     pathType: ImplementationSpecific
@@ -226,6 +226,8 @@ ingress:
       ingress.kubernetes.io/proxy-body-size: '0'
       nginx.ingress.kubernetes.io/ssl-redirect: 'true'
       nginx.ingress.kubernetes.io/proxy-body-size: '0'
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: ca-issuer
     ## @param ingress.core.tls Enable TLS configuration for the host defined at `ingress.core.hostname` parameter
     ## TLS certificates will be retrieved from a TLS secret with name: `{{- printf "%s-tls" .Values.ingress.core.hostname }}`
     ## You can:
@@ -261,10 +263,7 @@ ingress:
     ##     - core.harbor.domain
     ##   secretName: core.harbor.domain-tls
     ##
-    extraTls: 
-      - secretName: harbor.fredric.playground.cld-tls
-        hosts:
-          - harbor.fredric.playground.cld
+    extraTls: []
     ## @param ingress.core.secrets Custom TLS certificates as secrets
     ## NOTE: 'key' and 'certificate' are expected in PEM format
     ## NOTE: 'name' should line up with a 'secretName' set further up
@@ -2895,7 +2894,7 @@ exporter:
 ## @param postgresql.primary.initdb.scripts [object] Initdb scripts to create Harbor databases
 ##
 postgresql:
-  enabled: true
+  enabled: false
   ## Override PostgreSQL default image as 14.x is not supported https://goharbor.io/docs/2.4.0/install-config/
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql
   ## @param postgresql.image.registry [default: REGISTRY_NAME] PostgreSQL image registry
@@ -2932,12 +2931,12 @@ postgresql:
 ## @param externalDatabase.coreDatabase External database name for core
 ##
 externalDatabase:
-  host: localhost
+  host: postgresql.datastore.svc
   port: 5432
-  user: bn_harbor
-  password: ""
+  user: harbor
+  password: harbor
   sslmode: disable
-  coreDatabase: ""
+  coreDatabase: harbor_core
 
 ## @section Redis&reg; parameters
 ##
@@ -2954,7 +2953,7 @@ externalDatabase:
 ## @param redis.sentinel.service.ports.sentinel Redis&reg; service port for Redis&reg; Sentinel
 ##
 redis:
-  enabled: true
+  enabled: false
   auth:
     enabled: false
     ## Redis&reg; password (both master and slave). Defaults to a random 10-character alphanumeric string if not set and auth.enabled is true.
@@ -2983,9 +2982,9 @@ redis:
 ## @param externalRedis.trivyAdapterDatabaseIndex Index for trivy adapter database
 ##
 externalRedis:
-  host: localhost
+  host: redis-harbor-master.datastore.svc
   port: 6379
-  password: ""
+  password: redis
   coreDatabaseIndex: '0'
   jobserviceDatabaseIndex: '1'
   registryDatabaseIndex: '2'
@@ -3005,7 +3004,7 @@ externalRedis:
 metrics:
   ## @param metrics.enabled Whether or not to enable metrics for different
   ##
-  enabled: false
+  enabled: true
   ## @param metrics.path Path where metrics are exposed
   ##
   path: /metrics
@@ -3014,7 +3013,7 @@ metrics:
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled if `true`, creates a Prometheus Operator ServiceMonitor (requires `metrics.enabled` to be `true`)
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     ##
     namespace: ""
@@ -3028,7 +3027,8 @@ metrics:
     scrapeTimeout: ""
     ## @param metrics.serviceMonitor.labels Additional labels that can be used so ServiceMonitor will be discovered by Prometheus
     ##
-    labels: {}
+    labels: 
+      release: kube-prometheus-stack
     ## @param metrics.serviceMonitor.selector Prometheus instance selector labels
     ## ref: https://github.com/bitnami/charts/tree/main/bitnami/prometheus-operator#prometheus-configuration
     ##

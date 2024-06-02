@@ -1,0 +1,157 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: carts
+spec:
+  host: carts.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: carts
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: carts-db
+spec:
+  host: carts-db.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: carts-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: catalogue
+spec:
+  host: catalogue.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: catalogue
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: catalogue-db
+spec:
+  host: catalogue-db.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: catalogue-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: orders
+spec:
+  host: orders.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: orders
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: orders-db
+spec:
+  host: orders-db.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: orders-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: payment
+spec:
+  host: payment.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: payment
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: queue-master
+spec:
+  host: queue-master.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: queue-master
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: rabbitmq
+spec:
+  host: rabbitmq.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: rabbitmq
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: shipping
+spec:
+  host: shipping.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: shipping
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: user
+spec:
+  host: user.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: user
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: user-db
+spec:
+  host: user-db.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+      name: user-db
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: front-end
+spec:
+  host: front-end.sock-shop.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2

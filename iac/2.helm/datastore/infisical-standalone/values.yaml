@@ -1,0 +1,87 @@
+nameOverride: ""
+fullnameOverride: ""
+
+infisical:
+  enabled: true
+  name: infisical
+  autoDatabaseSchemaMigration: true
+  fullnameOverride: ""
+  podAnnotations: {}
+  deploymentAnnotations: {}
+  replicaCount: 1
+
+  image:
+    repository: infisical/infisical
+    tag: "v0.67.0-postgres"
+    pullPolicy: IfNotPresent
+    imagePullSecrets: []
+
+  affinity: {}
+  kubeSecretRef: "infisical-secrets"
+  kubeSecretGenerate:
+    enabled: true
+    env:
+      AUTH_SECRET: "Requred" #openssl rand -base64 32
+      ENCRYPTION_KEY: "Requerd" #openssl rand -hex 16
+      REDIS_URL: "Requerd" #redis://$user:$password@$service_domain:$service_port
+      DB_CONNECTION_URI: "Requerd" #postgresql://$user:$password@$service_domain:$service_port/$database
+
+  service:
+    annotations: {}
+    type: ClusterIP
+    nodePort: ""
+
+  resources:
+    limits:
+      memory: 600Mi
+    requests:
+      cpu: 350m
+
+ingress:
+  enabled: false
+  hostName: ""
+  ingressClassName: nginx
+  nginx:
+    enabled: false
+  annotations: {}
+  tls:
+    []
+    # - secretName: letsencrypt-prod
+    #   hosts:
+    #     - some.domain.com
+
+postgresql:
+  enabled: false
+  name: "postgresql"
+  fullnameOverride: "postgresql"
+  auth:
+    username: infisical
+    password: root
+    database: infisicalDB
+
+externalPostgresql:
+  enabled: false
+  fqdn: postgresql.datastore.svc
+  port: 5432
+  auth:
+    username: infisical
+    password: infisical
+    database: infisical
+
+redis:
+  enabled: false
+  name: "redis"
+  fullnameOverride: "redis"
+  cluster:
+    enabled: false
+  usePassword: true
+  auth:
+    password: "redis"
+  architecture: standalone
+
+externalRedis:
+  enabled: false
+  fqdn: redis-infisical-master.datastore.svc
+  port: 6379
+  auth:
+    password: "redis"

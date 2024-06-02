@@ -12,7 +12,7 @@
 global:
   imageRegistry: ""
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: local-path
 
 ## @section Common parameters
 
@@ -849,7 +849,7 @@ metrics:
     targetPort: 9402
     ## @param metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
     ## e.g:
     ## namespace: monitoring
@@ -883,7 +883,8 @@ metrics:
     selector: {}
     ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
     ##
-    labels: {}
+    labels: 
+      release: kube-prometheus-stack
     ## @param metrics.serviceMonitor.additionalLabels DEPRECATED. Use metrics.serviceMonitor.labels instead.
     ##
     additionalLabels: {}

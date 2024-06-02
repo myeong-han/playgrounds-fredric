@@ -1,0 +1,27 @@
+{{- range $name, $persistence := .Values.persistence -}}
+{{- if and (not $persistence.existingClaim) ($persistence.enabled) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "dockermailserver.fullname" $ }}-{{ $name }}
+  {{- if $persistence.annotations }}
+  annotations:
+  {{ toYaml $persistence.annotations | indent 2 }}  
+  {{ end }}
+spec:
+  accessModes:
+  {{ toYaml $persistence.accessModes | indent 2 }}
+    
+  {{- if $persistence.storageClass }}
+  storageClassName: {{ $persistence.storageClass | quote }}
+  {{- end }}    
+  resources:
+    requests:
+      storage: {{ $persistence.size | quote }}
+  {{- if $persistence.selector }}
+  selector:
+{{ toYaml $persistence.selector | indent 4 }}
+  {{ end }}
+---
+{{- end }}
+{{- end }}

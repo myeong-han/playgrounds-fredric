@@ -1,0 +1,282 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: gw-tls-fredric
+  namespace: istio-ingress
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-fredric.playground.cld # This should match the Certificate secretName
+    hosts:
+    - "*.fredric.playground.cld"
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-harbor
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "harbor.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /api/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core.cicd.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /service/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core.cicd.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /v2
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core.cicd.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /chartrepo/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core.cicd.svc.cluster.local
+  - match:
+    - uri:
+        prefix: /c/
+    route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-core.cicd.svc.cluster.local
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: harbor-portal.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-nexus-repository
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "nexus.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 8081
+        host: nexus-repository-manager.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-chartmuseum
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "chart.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 8080
+        host: chartmuseum.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-argocd-server
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "argocd.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 443
+        host: argo-cd-server.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-argo-workflow-server
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "argow.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: argo-workflows-server.cicd.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-prometheus
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "prometheus.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 9090
+        host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-grafana
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "grafana.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-jaeger
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "jaeger.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 16686
+        host: jaeger-operator-jaeger-query.istio-system.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-kiali
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "kiali.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 20001
+        host: kiali.istio-system.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-thanos
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "thanos.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 10901
+        host: kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-thanos-ruler
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "thanos-ruler.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 10902
+        host: kube-prometheus-stack-thanos-ruler.monitoring.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-infisical
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "vault.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 8080
+        host: infisical-infisical-standalone-infisical.datastore.svc.cluster.local

@@ -1,0 +1,158 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: carts
+spec:
+  hosts:
+  - carts.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: carts.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: carts-db
+spec:
+  hosts:
+  - carts-db.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: carts-db.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: catalogue
+spec:
+  hosts:
+  - catalogue.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: catalogue.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: catalogue-db
+spec:
+  hosts:
+  - catalogue-db.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: catalogue-db.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: orders
+spec:
+  hosts:
+  - orders.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+      #host: catalogue-db.sock-shop.svc.cluster.local
+        host: orders.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: orders-db
+spec:
+  hosts:
+  - orders-db.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: orders-db.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: payment
+spec:
+  hosts:
+  - payment.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: payment.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: queue-master
+spec:
+  hosts:
+  - queue-master.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: queue-master.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: rabbitmq
+spec:
+  hosts:
+  - rabbitmq.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: rabbitmq.sock-shop.svc.cluster.local
+        subset: v1
+        port:
+          number: 5672
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: shipping
+spec:
+  hosts:
+  - shipping.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: shipping.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user
+spec:
+  hosts:
+  - user.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: user.sock-shop.svc.cluster.local
+        subset: v1
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user-db
+spec:
+  hosts:
+  - user-db.sock-shop.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: user-db.sock-shop.svc.cluster.local
+        subset: v1
