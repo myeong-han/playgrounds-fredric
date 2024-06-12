@@ -23,6 +23,23 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: vs-kubesphere
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "kubesphere.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: ks-console.kubesphere-system.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: vs-harbor
   namespace: istio-ingress
 spec:
@@ -279,4 +296,21 @@ spec:
     - destination:
         port:
           number: 8080
-        host: infisical-infisical-standalone-infisical.datastore.svc.cluster.local
+        host: infisical-infisical-standalone-infisical.managing.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-keycloak
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "keycloak.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: keycloak.managing.svc.cluster.local
