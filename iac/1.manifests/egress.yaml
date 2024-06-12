@@ -1,0 +1,50 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: gw-egress-default
+  namespace: istio-egress
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: google-dns
+  namespace: istio-egress
+spec:
+  hosts:
+  - dns.google.com
+  ports:
+  - number: 53
+    name: dns
+    protocol: UDP
+  resolution: DNS
+  location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: google-dns
+  namespace: istio-egress
+spec:
+  hosts:
+  - dns.google.com
+  gateways:
+  - gw-egress-default
+  http:
+  - match:
+    - uri:
+        prefix: "/"
+    route:
+    - destination:
+        host: dns.google.com
+        port:
+          number: 53

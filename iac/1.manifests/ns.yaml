@@ -1,8 +1,9 @@
+###################
+### istio stack ###
+###################
 apiVersion: v1
 kind: Namespace
 metadata:
-  labels:
-    kubernetes.io/metadata.name: istio-system
   name: istio-system
 spec:
   finalizers:
@@ -11,8 +12,6 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  labels:
-    kubernetes.io/metadata.name: istio-ingress
   name: istio-ingress
 spec:
   finalizers:
@@ -21,8 +20,6 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  labels:
-    kubernetes.io/metadata.name: istio-egress
   name: istio-egress
 spec:
   finalizers:
@@ -31,19 +28,19 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  labels:
-    kubernetes.io/metadata.name: kubesphere-system
   name: kubesphere-system
 spec:
   finalizers:
   - kubernetes
 ---
+######################
+### istio managing ###
+######################
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: default
   name: default
 spec:
   finalizers:
@@ -54,7 +51,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: forward
   name: forward
 spec:
   finalizers:
@@ -65,7 +61,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: alpha
   name: alpha
 spec:
   finalizers:
@@ -76,7 +71,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: certs
   name: certs
 spec:
   finalizers:
@@ -87,7 +81,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: cicd
   name: cicd
 spec:
   finalizers:
@@ -98,7 +91,16 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: datastore
+  name: managing
+spec:
+  finalizers:
+  - kubernetes
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: enabled
   name: datastore
 spec:
   finalizers:
@@ -109,7 +111,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: filestore
   name: filestore
 spec:
   finalizers:
@@ -120,7 +121,6 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: logging
   name: logging
 spec:
   finalizers:
@@ -131,30 +131,20 @@ kind: Namespace
 metadata:
   labels:
     istio-injection: enabled
-    kubernetes.io/metadata.name: mq
-  name: mq
-spec:
-  finalizers:
-  - kubernetes
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    istio-injection: enabled
-    kubernetes.io/metadata.name: game-hosting
   name: game-hosting
 spec:
   finalizers:
   - kubernetes
 ---
+################################
+### istio-injection disabled ###
+################################
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
     #    istio-injection: disabled
     istio-injection: disabled
-    kubernetes.io/metadata.name: monitoring
   name: monitoring
 spec:
   finalizers:
