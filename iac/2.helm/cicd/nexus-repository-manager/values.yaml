@@ -26,6 +26,7 @@ nexus:
     - name: INSTALL4J_ADD_VM_PARAMS
       value: |-
         -Xms2703M -Xmx2703M
+        -XX:ActiveProcessorCount=4
         -XX:MaxDirectMemorySize=2703M
         -XX:+UnlockExperimentalVMOptions
         -XX:+UseCGroupMemoryLimitForHeap
