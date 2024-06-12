@@ -512,7 +512,9 @@ controller:
   ## @param controller.hostAliases Argo CD pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
-  hostAliases: []
+  hostAliases:
+  - hostnames: ["harbor.fredric.playground.cld"]
+    ip: 192.168.0.4
   ## @param controller.podLabels Extra labels for Argo CD pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
@@ -2551,7 +2553,9 @@ server:
   ## @param server.hostAliases Argo CD server pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
-  hostAliases: []
+  hostAliases:
+  - hostnames: ["harbor.fredric.playground.cld"]
+    ip: 192.168.0.4
   ## @param server.podLabels Extra labels for Argo CD server pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
@@ -3072,7 +3076,9 @@ repoServer:
   ## @param repoServer.hostAliases Argo CD repo server pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
-  hostAliases: []
+  hostAliases:
+  - hostnames: ["harbor.fredric.playground.cld"]
+    ip: 192.168.0.4
   ## @param repoServer.podLabels Extra labels for Argo CD repo server pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
@@ -3597,7 +3603,9 @@ dex:
   ## @param dex.hostAliases Dex pods host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
-  hostAliases: []
+  hostAliases:
+  - hostnames: ["harbor.fredric.playground.cld"]
+    ip: 192.168.0.4
   ## @param dex.podLabels Extra labels for Dex pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##
