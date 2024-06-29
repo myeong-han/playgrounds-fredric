@@ -1,0 +1,59 @@
+{
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": {
+    "creationTimestamp": "2024-06-10T08:30:16Z",
+    "deletionTimestamp": "2024-06-12T05:33:03Z",
+    "labels": {
+      "kubernetes.io/metadata.name": "kubesphere-logging-system",
+      "kubesphere.io/namespace": "kubesphere-logging-system",
+      "kubesphere.io/workspace": "system-workspace"
+    },
+    "name": "kubesphere-logging-system",
+    "resourceVersion": "14529844",
+    "uid": "d76b1060-1f1b-4132-94ae-432f9fb7cd5a"
+  },
+  "spec": {
+    "finalizers": []
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastTransitionTime": "2024-06-12T05:33:09Z",
+        "message": "All resources successfully discovered",
+        "reason": "ResourcesDiscovered",
+        "status": "False",
+        "type": "NamespaceDeletionDiscoveryFailure"
+      },
+      {
+        "lastTransitionTime": "2024-06-12T05:33:09Z",
+        "message": "All legacy kube types successfully parsed",
+        "reason": "ParsedGroupVersions",
+        "status": "False",
+        "type": "NamespaceDeletionGroupVersionParsingFailure"
+      },
+      {
+        "lastTransitionTime": "2024-06-12T05:33:09Z",
+        "message": "All content successfully deleted, may be waiting on finalization",
+        "reason": "ContentDeleted",
+        "status": "False",
+        "type": "NamespaceDeletionContentFailure"
+      },
+      {
+        "lastTransitionTime": "2024-06-12T05:33:09Z",
+        "message": "Some resources are remaining: rulers.events.kubesphere.io has 1 resource instances",
+        "reason": "SomeResourcesRemain",
+        "status": "True",
+        "type": "NamespaceContentRemaining"
+      },
+      {
+        "lastTransitionTime": "2024-06-12T05:33:09Z",
+        "message": "Some content in the namespace has finalizers remaining: rulers.finalizer.events.kubesphere.io in 1 resource instances",
+        "reason": "SomeFinalizersRemain",
+        "status": "True",
+        "type": "NamespaceFinalizersRemaining"
+      }
+    ],
+    "phase": "Terminating"
+  }
+}
