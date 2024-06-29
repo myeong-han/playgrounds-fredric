@@ -1,0 +1,926 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: trivy
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/name: harbor
+    name: data-harbor-trivy-0
+    namespace: cicd
+    resourceVersion: "46398"
+    uid: c805f9e6-fd89-412f-8122-09926f97ab62
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-c805f9e6-fd89-412f-8122-09926f97ab62
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 5Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: primary
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/name: postgresql
+    name: data-harbor-postgresql-0
+    namespace: cicd
+    resourceVersion: "46440"
+    uid: ff8ac99c-e9e8-4d0c-9d2e-70de75a57b5a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-ff8ac99c-e9e8-4d0c-9d2e-70de75a57b5a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/name: redis
+    name: redis-data-harbor-redis-master-0
+    namespace: cicd
+    resourceVersion: "46455"
+    uid: 1e70e530-d9ea-494a-9d89-e4ab5f65472d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-1e70e530-d9ea-494a-9d89-e4ab5f65472d
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: palworld
+      meta.helm.sh/release-namespace: game-hosting
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T15:09:35Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: palworld-datadir-pvc
+      app.kubernetes.io/instance: palworld
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: palworld-datadir-pvc
+      app.kubernetes.io/version: latest
+      helm.sh/chart: palworld-0.1.0
+    name: palworld-datadir-pvc
+    namespace: game-hosting
+    resourceVersion: "67837"
+    uid: f62460d9-bcab-49f7-8c20-304854785adf
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 12Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-f62460d9-bcab-49f7-8c20-304854785adf
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 12Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: minecraft
+      meta.helm.sh/release-namespace: game-hosting
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-class: local-path
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-03-02T16:04:04Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: minecraft-minecraft
+      app.kubernetes.io/instance: minecraft-minecraft
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: minecraft
+      app.kubernetes.io/version: 4.15.0
+      chart: minecraft-4.15.0
+      heritage: Helm
+      release: minecraft
+    name: minecraft-minecraft-datadir
+    namespace: game-hosting
+    resourceVersion: "752078"
+    uid: 9be4cdff-7bb3-4c6b-bb62-cad6c935819a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-9be4cdff-7bb3-4c6b-bb62-cad6c935819a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: minecraft
+      meta.helm.sh/release-namespace: game-hosting
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-class: local-path
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-03-02T16:04:04Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: minecraft-minecraft
+      app.kubernetes.io/instance: minecraft-minecraft
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: minecraft
+      app.kubernetes.io/version: 4.15.0
+      chart: minecraft-4.15.0
+      heritage: Helm
+      release: minecraft
+    name: minecraft-minecraft-backupdir
+    namespace: game-hosting
+    resourceVersion: "752081"
+    uid: ce4aad4b-b17e-476e-806d-01f05372d222
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-ce4aad4b-b17e-476e-806d-01f05372d222
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      helm.sh/resource-policy: keep
+      meta.helm.sh/release-name: harbor
+      meta.helm.sh/release-namespace: cicd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: jobservice
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: harbor
+      app.kubernetes.io/version: 2.9.1
+      helm.sh/chart: harbor-19.1.1
+    name: harbor-jobservice
+    namespace: cicd
+    resourceVersion: "1230136"
+    uid: 27044630-0b6d-4a48-af35-77b8d1f3a92d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-27044630-0b6d-4a48-af35-77b8d1f3a92d
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      helm.sh/resource-policy: keep
+      meta.helm.sh/release-name: harbor
+      meta.helm.sh/release-namespace: cicd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: jobservice
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: harbor
+      app.kubernetes.io/version: 2.9.1
+      helm.sh/chart: harbor-19.1.1
+    name: harbor-jobservice-scandata
+    namespace: cicd
+    resourceVersion: "1230137"
+    uid: 505255f1-b1dd-4da0-aad4-7d50dc9566dd
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-505255f1-b1dd-4da0-aad4-7d50dc9566dd
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      helm.sh/resource-policy: keep
+      meta.helm.sh/release-name: harbor
+      meta.helm.sh/release-namespace: cicd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-02-09T07:02:45Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: registry
+      app.kubernetes.io/instance: harbor
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: harbor
+      app.kubernetes.io/version: 2.9.1
+      helm.sh/chart: harbor-19.1.1
+    name: harbor-registry
+    namespace: cicd
+    resourceVersion: "1230138"
+    uid: c8af0188-69e4-4f10-a3e8-b491fa890277
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 5Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-c8af0188-69e4-4f10-a3e8-b491fa890277
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 5Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T05:37:35Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: primary
+      app.kubernetes.io/instance: postgresql
+      app.kubernetes.io/name: postgresql
+    name: data-postgresql-0
+    namespace: datastore
+    resourceVersion: "4594464"
+    uid: 1edc5be4-d5d5-4004-a890-038c811ae3b2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-1edc5be4-d5d5-4004-a890-038c811ae3b2
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T06:17:20Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-replicas-0
+    namespace: datastore
+    resourceVersion: "4597418"
+    uid: a8864771-b5bc-4acb-b565-b842e860c81d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-a8864771-b5bc-4acb-b565-b842e860c81d
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T06:17:20Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: redis
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-master-0
+    namespace: datastore
+    resourceVersion: "4597421"
+    uid: 14c5989c-a7c1-49db-ac82-c546902a38c4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-14c5989c-a7c1-49db-ac82-c546902a38c4
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T06:18:00Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-replicas-1
+    namespace: datastore
+    resourceVersion: "4597551"
+    uid: 39b5d784-192a-479d-b711-c85c3eb42378
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-39b5d784-192a-479d-b711-c85c3eb42378
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T06:18:30Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-replicas-2
+    namespace: datastore
+    resourceVersion: "4597638"
+    uid: fe62aacd-4db1-45cc-aee6-e018ef30ea70
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-fe62aacd-4db1-45cc-aee6-e018ef30ea70
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-12T12:45:09Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: primary
+      app.kubernetes.io/instance: mariadb
+      app.kubernetes.io/name: mariadb
+    name: data-mariadb-0
+    namespace: datastore
+    resourceVersion: "4626924"
+    uid: b7ac5e9e-cb8e-49b3-b9cc-62e87417349e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-b7ac5e9e-cb8e-49b3-b9cc-62e87417349e
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-04-22T09:30:21Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/instance: cassandra
+      app.kubernetes.io/name: cassandra
+    name: data-cassandra-0
+    namespace: datastore
+    resourceVersion: "5611182"
+    uid: 7382a252-b246-4ea9-a6d8-6a438520a85a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-7382a252-b246-4ea9-a6d8-6a438520a85a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-05T08:57:33Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: argo-cd
+      app.kubernetes.io/name: redis
+    name: redis-data-argo-cd-redis-master-0
+    namespace: cicd
+    resourceVersion: "6956036"
+    uid: a38bada7-1343-4fd6-a528-18ef7d6eeea4
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-a38bada7-1343-4fd6-a528-18ef7d6eeea4
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-09T02:05:54Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis-argocd
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-argocd-replicas-0
+    namespace: datastore
+    resourceVersion: "7383109"
+    uid: 8479c5a0-dd8e-4893-8924-a41fae07329a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-8479c5a0-dd8e-4893-8924-a41fae07329a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-09T02:05:54Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: redis-argocd
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-argocd-master-0
+    namespace: datastore
+    resourceVersion: "7383112"
+    uid: 55909366-f6ab-4703-b863-762a7ce1ee06
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-55909366-f6ab-4703-b863-762a7ce1ee06
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-09T02:15:14Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: redis-harbor
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-harbor-master-0
+    namespace: datastore
+    resourceVersion: "7384304"
+    uid: a4bdab05-0e28-4619-aeed-92bdb773f155
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-a4bdab05-0e28-4619-aeed-92bdb773f155
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-09T02:15:14Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis-harbor
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-harbor-replicas-0
+    namespace: datastore
+    resourceVersion: "7384307"
+    uid: 31bf12a7-13fb-4e68-87f9-1bdfdcbe515e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-31bf12a7-13fb-4e68-87f9-1bdfdcbe515e
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: chartmuseum
+      meta.helm.sh/release-namespace: cicd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-22T03:12:47Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/instance: chartmuseum
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: chartmuseum
+      app.kubernetes.io/version: 0.16.1
+      helm.sh/chart: chartmuseum-3.10.2
+    name: chartmuseum
+    namespace: cicd
+    resourceVersion: "8977842"
+    uid: 0e558c21-312f-4359-a18e-22e8c652e090
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-0e558c21-312f-4359-a18e-22e8c652e090
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: nexus-repository-manager
+      meta.helm.sh/release-namespace: cicd
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-22T05:54:20Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/instance: nexus-repository-manager
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: nexus-repository-manager
+      app.kubernetes.io/version: 3.64.0
+      helm.sh/chart: nexus-repository-manager-64.2.0
+    name: nexus-repository-manager-data
+    namespace: cicd
+    resourceVersion: "8991557"
+    uid: c6129a4c-c551-498a-9fbe-cfccc5504024
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-c6129a4c-c551-498a-9fbe-cfccc5504024
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-24T04:28:55Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: redis-infisical
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-infisical-master-0
+    namespace: datastore
+    resourceVersion: "9228406"
+    uid: 9784cbfa-9bda-41be-bb72-bb0df3d5631e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-9784cbfa-9bda-41be-bb72-bb0df3d5631e
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: fredric
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2024-05-24T04:28:55Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: replica
+      app.kubernetes.io/instance: redis-infisical
+      app.kubernetes.io/name: redis
+    name: redis-data-redis-infisical-replicas-0
+    namespace: datastore
+    resourceVersion: "9228409"
+    uid: eea15abf-e63f-4c0e-9f03-187d7eff332b
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-eea15abf-e63f-4c0e-9f03-187d7eff332b
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""
