@@ -2,7 +2,8 @@
 
 playgrounds fredric is a collection of k3s-based service infrastructure IAC for private testing of my personal projects.
 
-## Total Architecture
+## Architecture
+### total Infra
 ```mermaid
 flowchart LR
     A((Fredric's Playground))-->B((IaaS: on-premise K3s)):::_node
@@ -92,7 +93,7 @@ flowchart LR
     classDef _container stroke:#0FF,fill:#155
     classDef _node stroke:#F00,fill:#511
 ```
-### Micro-frontend
+### Micro-frontend for SEO
 ```mermaid
 flowchart LR
 	subgraph hostmodule
