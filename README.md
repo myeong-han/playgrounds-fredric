@@ -2,6 +2,7 @@
 
 playgrounds fredric is a collection of k3s-based service infrastructure IAC for private testing of my personal projects.
 
+## Total Architecture
 ```mermaid
 flowchart LR
     A((Fredric's Playground))-->B((IaaS: on-premise K3s)):::_node
@@ -90,6 +91,22 @@ flowchart LR
     classDef _application stroke:#FF0,fill:#551
     classDef _container stroke:#0FF,fill:#155
     classDef _node stroke:#F00,fill:#511
+```
+### Micro-frontend
+```mermaid
+flowchart LR
+	subgraph hostmodule
+		direction TB
+		www.aaa.com --> nginx
+		NextJS -.Resoucre Caching,
+			LoadBalancing.-> nginx
+		nginx -.Proxy.-> NextJS
+	end
+	direction TB
+		Search --SEO-->	hostmodule
+	hostmodule -.webpack5 MF.-> module1[한국투자증권 예약투자 앱-CSR NextJS]
+	hostmodule -.webpack5 MF.-> module2[Notion 기반 블로그 문서-SSR NextJS]
+	hostmodule -.webpack5 MF.-> module3[동영상 스트리밍 사이트-SSR NextJS]
 ```
 
 ## Installation
