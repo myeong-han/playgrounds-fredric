@@ -3,7 +3,7 @@
 playgrounds fredric is a collection of k3s-based service infrastructure IAC for private testing of my personal projects.
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/77d11aea-0f35-443e-b64e-4c5dd309320a" width="300px" height="300px">
+	<img src="https://github.com/user-attachments/assets/77d11aea-0f35-443e-b64e-4c5dd309320a" width="300px" height="300px">
 </p>
 
 ## Architecture
