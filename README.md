@@ -117,6 +117,9 @@ flowchart LR
 ## Installation
 
 ```bash
+# 환경변수 로드
+export $(grep -v '^#' .env | xargs)
+
 #todo
 ```
 
