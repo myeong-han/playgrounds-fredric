@@ -5,6 +5,9 @@ playgrounds fredric is a collection of k3s-based service infrastructure IAC for 
 ## Installation
 
 ```bash
+# 환경변수 로드
+export $(grep -v '^#' .env | xargs)
+
 #todo
 ```
 
