@@ -314,3 +314,21 @@ spec:
         port:
           number: 80
         host: keycloak.managing.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-dashboard
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "dashboard.fredric.playground.cld"
+  gateways:
+  - gw-tls-fredric
+  http:
+  - route:
+    - destination:
+        port:
+          number: 443
+        host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local
+
