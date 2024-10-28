@@ -18,6 +18,25 @@ spec:
       credentialName: tls-fredric.playground.cld # This should match the Certificate secretName
     hosts:
     - "*.fredric.playground.cld"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: gw-fredric18-online
+  namespace: istio-ingress
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using Helm following the standard documentation, this would be "istio=ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*.fredric18.online"
+    - "fredric18.online"
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -331,4 +350,54 @@ spec:
         port:
           number: 443
         host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local
-
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-n8n
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "n8n.fredric18.online"
+  gateways:
+  - gw-fredric18-online
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: n8n.n8n.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-llama-api
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "llama-api.fredric18.online"
+  gateways:
+  - gw-fredric18-online
+  http:
+  - route:
+    - destination:
+        port:
+          number: 11434
+        host: open-webui-ollama.ollama.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-llama-ui
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "llama.fredric18.online"
+  gateways:
+  - gw-fredric18-online
+  http:
+  - route:
+    - destination:
+        port:
+          number: 80
+        host: open-webui.ollama.svc.cluster.local
