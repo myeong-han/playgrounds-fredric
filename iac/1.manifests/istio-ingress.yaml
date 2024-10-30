@@ -37,7 +37,28 @@ spec:
     hosts:
     - "*.fredric18.online"
     - "fredric18.online"
-
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-api-route
+  namespace: istio-ingress
+spec:
+  hosts:
+  - "api.fredric18.online"
+  gateways:
+  - gw-fredric18-online
+  http:
+  - match:
+    - uri:
+        prefix: "/api/v1/llama"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        port:
+          number: 11434
+        host: open-webui-ollama.ollama.svc.cluster.local
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -371,28 +392,11 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: vs-llama-api
+  name: vs-open-webui
   namespace: istio-ingress
 spec:
   hosts:
-  - "llama-api.fredric18.online"
-  gateways:
-  - gw-fredric18-online
-  http:
-  - route:
-    - destination:
-        port:
-          number: 11434
-        host: open-webui-ollama.ollama.svc.cluster.local
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: vs-llama-ui
-  namespace: istio-ingress
-spec:
-  hosts:
-  - "llama.fredric18.online"
+  - "chat.fredric18.online"
   gateways:
   - gw-fredric18-online
   http:
@@ -401,3 +405,20 @@ spec:
         port:
           number: 80
         host: open-webui.ollama.svc.cluster.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-llama-api
+  namespace: istio-ingress
+spec:
+  gateways:
+  - gw-fredric18-online
+  hosts:
+  - llama.fredric18.online
+  http:
+  - route:
+    - destination:
+        host: open-webui-ollama.ollama.svc.cluster.local
+        port:
+          number: 11434
