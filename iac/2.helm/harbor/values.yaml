@@ -128,7 +128,7 @@ ipFamily:
 ## Use "proxy" to use a deploy NGINX proxy in front of Harbor services
 ## Use "ingress" to use an Ingress Controller as proxy
 ##
-exposureType: ingress
+exposureType: proxy
 
 ## Service parameters
 ##
@@ -148,8 +148,8 @@ service:
   ## NOTE: choose port between <30000-32767>
   ##
   nodePorts:
-    http: 31080
-    https: 31443
+    http: 31480
+    https: 31433
   ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
   ## Values: ClientIP or None
   ## ref: https://kubernetes.io/docs/user-guide/services/
@@ -686,7 +686,7 @@ nginx:
   tls:
     ## @param nginx.tls.enabled Enable TLS termination
     ##
-    enabled: true
+    enabled: false
     ## @param nginx.tls.existingSecret Existing secret name containing your own TLS certificates.
     ## The secret must contain the keys:
     ## `tls.crt` - the certificate (required),
@@ -702,7 +702,7 @@ nginx:
   ## if the reverse proxy already provides the 'X-Forwarded-Proto' header field.
   ## This is, for example, the case for the OpenShift HAProxy router.
   ##
-  behindReverseProxy: false
+  behindReverseProxy: true
   ## @param nginx.command Override default container command (useful when using custom images)
   ##
   command: []
