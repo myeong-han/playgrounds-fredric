@@ -365,3 +365,20 @@ spec:
         host: open-webui-ollama.ollama.svc.cluster.local
         port:
           number: 11434
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-nextcloud
+  namespace: istio-ingress
+spec:
+  gateways:
+  - gw-fredric18-online
+  hosts:
+  - drive.fredric18.online
+  http:
+  - route:
+    - destination:
+        host: nextcloud.nextcloud.svc.cluster.local
+        port:
+          number: 8080

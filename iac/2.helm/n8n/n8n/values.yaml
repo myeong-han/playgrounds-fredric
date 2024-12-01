@@ -22,9 +22,9 @@ config:
   database:
     type: postgresdb
     postgresdb:
-      host: ?
-      port: ?
-      password: ?
+      host: postgresql.datastore.svc.cluster.local
+      port: 5432
+      password: n8n
       database: n8n
       user: n8n
 # secret:
